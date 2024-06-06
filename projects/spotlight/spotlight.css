@@ -86,11 +86,6 @@ span {
   justify-content: center;
 }
 
-.video {
-  width: 100%;
-  border-radius: 1rem;
-}
-
 .view-project {
   max-width: 1280px;
   margin: auto;
