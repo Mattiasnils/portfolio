@@ -1,0 +1,283 @@
+:root {
+  --orange: orange;
+  --grey-text: rgb(130, 130, 130);
+  --grey-bg: rgb(36, 36, 35);
+  --primary: black;
+}
+
+nav {
+  box-shadow: unset;
+}
+
+nav a {
+  background-color: var(--primary);
+  color: white;
+}
+
+nav a:active,
+nav a:focus,
+nav a:hover {
+  box-shadow: unset;
+}
+
+.menu-icon span {
+  background-color: black;
+}
+
+body {
+  background: white;
+}
+
+.g {
+  padding: 0 5%;
+  max-width: 1280px;
+  margin: 4rem auto;
+}
+
+.g img,
+video {
+  width: 100%;
+  margin: 2rem 0;
+}
+
+#hero {
+  display: block;
+  margin: 2rem auto 0 auto;
+  width: 100%;
+  max-width: 1024px;
+  z-index: -999;
+}
+
+.headline {
+  display: flex;
+  position: relative;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.project-summary {
+  align-items: top;
+  display: block;
+  margin: 2rem auto 0 auto;
+  padding: 0 10%;
+  max-width: 1024px;
+}
+
+.project-summary h3 {
+  padding-top: 2rem;
+}
+
+.project-summary a {
+  color: black;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+h1 {
+  padding: unset;
+  color: var(--orange);
+  text-align: center;
+}
+
+h2 {
+  padding: unset;
+  color: black;
+}
+
+h3 {
+  color: black;
+  font-size: 1.2rem;
+  padding-bottom: 0.5rem;
+}
+
+h4 {
+  color: black;
+  text-align: center;
+  padding: 4rem 2rem 2rem 2rem;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+h5 {
+  color: var(--orange);
+  font-weight: bold;
+  text-align: left;
+  font-size: 2rem;
+  margin: 0 0 1.5rem 0;
+}
+
+h6 {
+  color: rgb(174, 174, 174);
+  font-weight: bold;
+  text-align: left;
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem 0;
+}
+
+p {
+  color: black;
+  line-height: 1.5rem;
+  text-wrap: wrap;
+}
+
+.tools-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tool-icon {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: row;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background-color: rgb(100, 100, 100, 0.5);
+  border-radius: 0.5rem;
+}
+
+b {
+  font-weight: bold;
+}
+
+strong {
+  font-weight: bold;
+  color: var(--orange);
+}
+
+.callout {
+  padding: 0 1rem 0 1rem;
+  overflow-y: auto;
+  max-height: 300px;
+}
+
+.divider {
+  background: linear-gradient(to right, white, black, white);
+  display: block;
+  height: 1px;
+  width: 80%;
+  max-width: 1024px;
+  margin: 2rem auto;
+}
+
+iframe {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.33;
+  margin-bottom: 0.5rem;
+}
+
+main ul li {
+  padding-bottom: 1.5rem;
+}
+
+.project-card {
+  border-radius: 2rem;
+  padding: 2rem;
+  background-color: white;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
+
+.project-card-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-wrap: balance;
+  gap: 1rem;
+}
+
+.project-card-title p {
+  color: var(--grey-text);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.placeholder {
+  position: relative;
+  display: inline-block;
+}
+
+.image-placeholder {
+  position: relative;
+  all: unset;
+  height: 100%;
+  width: 100%;
+  aspect-ratio: 1.33;
+  filter: brightness(0.5);
+}
+
+button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background-color: rgb(0, 140, 255);
+  color: white;
+  font-size: 1rem;
+  border-radius: 2rem;
+  border: 0;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover,
+button:focus {
+  background-color: rgb(0, 104, 189);
+  scale: 1.05;
+}
+
+button:active {
+  scale: 1;
+}
+
+.two-cols-60-40 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+@media (min-width: 960px) {
+  .project-summary {
+    align-items: top;
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    row-gap: 1rem;
+    column-gap: 2rem;
+    margin: 10rem auto 0 auto;
+    padding: 0 10% 2rem 10%;
+    max-width: 1024px;
+  }
+
+  .project-summary p,
+  .project-summary h3 {
+    padding: unset;
+  }
+
+  .two-cols-60-40 {
+    display: grid;
+    grid-template-columns: 0.6fr 0.4fr;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .callout {
+    aspect-ratio: 0.85;
+    max-height: unset;
+  }
+}
+
+@media (max-width: 450px) {
+  button {
+    display: none;
+  }
+
+  .image-placeholder {
+    filter: unset;
+  }
+}

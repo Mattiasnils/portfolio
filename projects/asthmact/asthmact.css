@@ -1,0 +1,139 @@
+body {
+  background: white;
+}
+
+#hero {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1280px;
+  z-index: -999;
+}
+
+.headline {
+  display: flex;
+  position: relative;
+  align-items: center;
+  padding-bottom: 2rem;
+}
+
+.headline img {
+  width: 60px;
+}
+
+.project-summary {
+  align-items: top;
+  display: block;
+  margin: 0 auto;
+  padding: 0 10%;
+  max-width: 1024px;
+}
+
+.project-summary h3 {
+  padding-top: 2rem;
+}
+
+h1 {
+  padding: unset;
+  color: black;
+  text-align: center;
+}
+
+h2 {
+  padding-bottom: 2rem;
+}
+
+h3 {
+  color: black;
+  font-size: 1.2rem;
+  padding-bottom: 0.5rem;
+}
+
+p {
+  color: black;
+  line-height: 1.5rem;
+}
+
+strong {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.tools-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tool-icon {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: row;
+  gap: 0.5rem;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  background-color: rgb(100, 100, 100, 0.5);
+  border-radius: 0.5rem;
+}
+
+.tool-icon p {
+  color: white;
+}
+
+span {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.divider {
+  background: var(--primary);
+  display: block;
+  height: 1px;
+  width: 80%;
+  max-width: 1024px;
+  margin: 2rem auto;
+}
+
+.view-project {
+  max-width: 1280px;
+  margin: auto;
+  margin-top: 5rem;
+  margin-bottom: 0;
+}
+
+@media (min-width: 767px) {
+  .view-project {
+    margin-bottom: 5rem;
+  }
+
+  .headline {
+    display: flex;
+    position: block;
+    align-items: center;
+    margin-bottom: 0;
+  }
+
+  .headline img {
+    width: 80px;
+  }
+
+  .project-summary {
+    align-items: top;
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    row-gap: 1rem;
+    column-gap: 2rem;
+    margin: 2rem auto 0 auto;
+    padding: 0 10% 2rem 10%;
+    max-width: 1024px;
+  }
+
+  .project-summary p,
+  .project-summary h3 {
+    padding: unset;
+  }
+}

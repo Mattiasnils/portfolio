@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      property="og:image"
+      content="https://mattiasnils.com/public/img/saab-thumbnail.png"
+    />
+    <title>Mattias Nilsson > Saab Design System</title>
+    <base href="/" />
+    <link rel="stylesheet" href="./resetStyles.css" />
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="projects/saab/saab.css" />
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+    <script defer src="nav.js"></script>
+    <script>
+      (function (h, o, t, j, a, r) {
+        h.hj =
+          h.hj ||
+          function () {
+            (h.hj.q = h.hj.q || []).push(arguments);
+          };
+        h._hjSettings = { hjid: 3794888, hjsv: 6 };
+        a = o.getElementsByTagName("head")[0];
+        r = o.createElement("script");
+        r.async = 1;
+        r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+        a.appendChild(r);
+      })(window, document, "https://static.hotjar.com/c/hotjar-", ".js?sv=");
+    </script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="menu-icon">
+          <input class="menu-icon__cheeckbox" type="checkbox" />
+          <div>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <ul>
+          <li><a href="index.html#work">Home</a></li>
+          <li><a href="/projects/ledway/ledway.html">⬅︎</a></li>
+          <li>
+            <a href="/projects/spotlight/spotlight.html">⮕</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="project-intro">
+        <div class="headline animate-pop-up">
+          <h1>Designing a Design System</h1>
+          <h2>For tactical interfaces</h2>
+        </div>
+        <img id="saab-logo" src="/projects/saab/img/Saab_Logo.svg" />
+        <img
+          id="hero"
+          src="/projects/saab/img/phoenix_design_system.png"
+          alt=""
+        />
+        <div class="project-summary">
+          <h3>Summary</h3>
+          <p>
+            Researched and developed a foundation to a design system for complex
+            Airborne Radar Applications. <br />
+            <br />
+            Carried out multiple <strong>Ethnographic Studies</strong> and
+            <strong>Co-design Workshops</strong> with developers, designers and
+            end-users to gather requirements from different perspectives.
+            Analyzed the current product portfolio through
+            <strong>Interface Audits</strong>, mapped out inconsistencies and
+            performed <strong>Heuristic Evaluations</strong> on the current UIs
+            to identify usability and accessibility issues. Performed
+            <strong>Literature Studies</strong> on how to bring coherence to UIs
+            and read three books on best practices for building and managing
+            effective design systems within large organizations. Finally,
+            presented insights and ideas to decision makers across the company
+            and prototyped a first iteration using
+            <strong>Tokenized Components in Figma</strong>. This was followed by
+            implementing parts of the system and providing to developers using
+            components in <strong>Java Swing</strong>.
+          </p>
+          <h3>Year</h3>
+          <p>2022</p>
+          <h3>Duration</h3>
+          <p>6 months</p>
+          <h3>With</h3>
+          <p>🙎🏽 Anton Linder</p>
+
+          <h3>Tools</h3>
+          <div class="tools-row">
+            <div class="tool-icon">
+              <img src="/public/icons/figma-icon.svg" alt="" />
+              <p>Figma</p>
+            </div>
+            <div class="tool-icon">
+              <img src="/public/icons/adobecc-icon.svg" alt="" />
+              <p>Adobe CC</p>
+            </div>
+            <div class="tool-icon">
+              <img src="/public/icons/miro-icon.svg" alt="" />
+              <p>Miro</p>
+            </div>
+            <div class="tool-icon">
+              <img src="/public/icons/java-icon.svg" alt="" />
+              <p>Java</p>
+            </div>
+          </div>
+          <h3>Report</h3>
+          <a
+            href="https://odr.chalmers.se/items/4e3981b9-23cd-47fd-958d-32cb5a1bc263"
+            target="_blank"
+            ><p>Designing a Design System for Coherent Tactical GUIs</p>
+            <img src="/public/icons/external-link-icon.svg" alt=""
+          /></a>
+        </div>
+      </div>
+      <span class="divider"></span>
+      <h4>Background</h4>
+      <div class="g">
+        <div>
+          <h5>GlobalEye</h5>
+          <p>
+            GlobalEye is the world's most advanced Airborne Early Warning &
+            Control (AEW&C) system. It provides long-range detection and
+            identification of objects in air, at sea and over land by combining
+            a variety of advanced sensors with a suite of sophisticated
+            applications.
+          </p>
+        </div>
+        <img
+          src="/projects/saab/img/globaleye_parked.png"
+          alt="Private jet with a radar on top of the aircraft parked on an airfield at night"
+        />
+      </div>
+      <div class="g behind">
+        <div>
+          <h5>AEW&C Applications</h5>
+          <p>
+            Aboard the aircraft, operators use two applications, A1 and A2, for
+            controlling and interpreting real-time data from the sensors. Data
+            is transmitted via satellite to a third, ground-based application:
+            A3.
+          </p>
+        </div>
+        <img
+          src="/projects/saab/img/aewc_applications.png"
+          alt="Private jet in the air with a radar on the top of the aircraft. A1, A2 are used in the aircraft and A3 is used on the ground"
+        />
+      </div>
+      <div class="g two-cols-50-50">
+        <div class="space-rows">
+          <div>
+            <h5>Problem brief</h5>
+            <p>
+              The AEW&C applications have been developed by different teams in
+              different locations without a synchronized design language. As a
+              result, the UIs differ in visual style, interaction patterns and
+              how tasks are performed, while also diverging from the Saab brand.
+              <br />
+              <br />
+              This leads to <b>incoherence</b> and <b>usability issues</b> for
+              radar operators and
+              <b>impedes collaboration and resource sharing</b> in development.
+            </p>
+          </div>
+          <div>
+            <h5>Project Proposal</h5>
+            <p>
+              To address these problems, the Human Factors Integration team at
+              Saab posited that we might be able to design a
+              <b>unified interface</b>
+              to be used as a common base for increasing functional and visual
+              consistency across the application suite.
+            </p>
+          </div>
+        </div>
+        <img
+          src="/projects/saab/img/base_product.png"
+          alt="Illustration of proposed base product fusing the interfaces into one interface, represented as a rectangle with a questionmark"
+        />
+      </div>
+      <div class="white-background">
+        <div class="g">
+          <h4>Design Process</h4>
+          <p class="center-text">
+            <b>
+              The task was approached using the Design Thinking Framework in
+              order to better understand the context, its stakeholders and the
+              root of the problem.
+            </b>
+          </p>
+          <img
+            class="scale-75"
+            src="/projects/saab/img/design_process_infinity.png"
+            alt="Infinity symbol consisting of the phases of the iterative design process: empathize, define, ideate, prototype and test."
+          />
+          <p class="center-text">
+            <b>
+              In practice, the project was divided into a pilot study followed
+              by a main design process where the team iterated through the five
+              steps of the framework
+            </b>
+          </p>
+          <img
+            src="/projects/saab/img/design_process_linear.png"
+            alt="Illustration of how the Pilot study preceded the main iterative design process: empathize, define, ideate, prototype and test."
+          />
+        </div>
+      </div>
+      <div class="g">
+        <h5>Pilot study</h5>
+        <div class="icon-list">
+          <div class="two-cols-50-50">
+            <div>
+              <ul>
+                <li>
+                  <img src="/projects/saab/img/interview_icon.svg" alt="" />
+                  <p>
+                    <b>Interviews</b> with designers, developers, operators and
+                    project owners
+                  </p>
+                </li>
+                <li>
+                  <img src="/projects/saab/img/desktop_icon.svg" alt="" />
+                  <p>
+                    <b>Application demos</b> and trying the interfaces
+                    first-hand in simulators
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <ul>
+                <li>
+                  <img src="/projects/saab/img/research_icon.svg" alt="" />
+                  <p>
+                    <b>Desk research</b> on previous work, consisteny and
+                    coherence in UIs
+                  </p>
+                </li>
+                <li>
+                  <img src="/projects/saab/img/tool_icon.svg" alt="" />
+                  <p>
+                    <b>Review</b> of existing internal design and development
+                    tools and resources
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="two-cols-50-50">
+          <div class="callout">
+            <h6>Key findings</h6>
+            <ul class="list">
+              <li>
+                Developers and designers across project teams lack organization
+                and platforms for communicating and coordinating efforts.
+              </li>
+              <li>
+                The applications have different UIs partly because they have
+                distinct purposes. Hence, designing for consistency alone isn't
+                the right approach.
+              </li>
+              <li>
+                The applications are developed in different programming
+                languages, using different components and style guides.
+              </li>
+              <li>
+                Saab's existing Brand Portal and HMI Guidelines do not provide
+                sufficient guidance for tactical UIs.
+              </li>
+            </ul>
+          </div>
+          <div class="callout">
+            <h6>Stakeholder needs</h6>
+            <ul class="list">
+              <li>
+                <strong>Developers</strong> need a coordinated approach to
+                application development, including better guidance in
+                implementing design decisions as code.
+              </li>
+              <li>
+                <strong>Designers</strong> need more granular control and
+                influence over holistic design decisions and how they are
+                implemented across specific customer projects.
+              </li>
+              <li>
+                <strong>Saab's customers</strong> demand customized applications
+                that can be tailored to their specific needs.
+              </li>
+              <li>
+                <strong>Radar operators</strong> need coherent UIs that support
+                complex, focused work for extended periods of time in critical
+                situations.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="white-background">
+        <div class="g">
+          <div class="two-cols-50-50">
+            <div class="space-rows">
+              <div>
+                <h6>Coherence vs Consistency</h6>
+                <p>
+                  Consistency is only concerned with uniformity whereas
+                  coherence expands the scope to consider how everything fits
+                  together in a meaningful and logical way to the user.
+                </p>
+              </div>
+              <img
+                src="/projects/saab/img/coherence_vs_consistency.png"
+                alt="Difference between coherence and consistency. Consistency is illustrated with identical puzzle pieces while coherence is illustraded by different puzzle pieces that fit together."
+              />
+            </div>
+            <div class="space-rows">
+              <div>
+                <h6>Minimizing the trade-off</h6>
+                <p>
+                  The relationship between coherence and responsiveness to
+                  customer demands can be thought of as a trade-off curve. One
+                  way of minimizing the trade-off is using a
+                  <b>design system</b>.
+                </p>
+              </div>
+              <img
+                src="/projects/saab/img/trade_off_curve.png"
+                alt="Coherence plotted against responsiveness. The current situation at Saab is that in order to reach more consistent UIs, you have to sacrifice coherence. A design system makes this relationship less of a trade-off."
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="g">
+        <div class="callout highlighted">
+          <h5>Pivot</h5>
+          <p>
+            From understanding the organizational context, empathizing with
+            stakeholder needs and researching methods for balancing coherence
+            with responsiveness in UI design, it was concluded that a promising
+            direction forward would be to pivot into
+            <b>designing a Design System.</b>
+          </p>
+        </div>
+      </div>
+      <div class="g">
+        <h5>Project scope</h5>
+        <p>
+          As design systems are complex and demand a lot of resources, the
+          project was limited to the following deliverables:
+        </p>
+        <ul class="icon-list">
+          <li>
+            <img src="/projects/saab/img/ds-icon.svg" alt="" />
+            <p>
+              A <b>design system</b> including foundational tokens, components
+              and patterns.
+            </p>
+          </li>
+          <li>
+            <img src="/projects/saab/img/doc-icon.svg" alt="" />
+            <p>
+              A <b>requirements list</b> for how Saab may implement and manage
+              the design system.
+            </p>
+          </li>
+          <li>
+            <img src="/projects/saab/img/ui-icon.svg" alt="" />
+            <p>
+              A <b>reference UI</b> in the form of a mockup exemplifying the
+              utilization of the design system.
+            </p>
+          </li>
+        </ul>
+      </div>
+      <span class="divider"></span>
+      <h4>Empathizing the Design System</h4>
+      <div class="g">
+        <h5>Researching Design Systems</h5>
+        <div class="two-cols-50-50">
+          <div class="space-rows">
+            <h6>3 Books</h6>
+            <img
+              src="/projects/saab/img/books.png"
+              alt="Book covers of three books (Atomic Design, Building Design Systems and Design Systems HandBook)"
+            />
+          </div>
+          <div class="space-rows">
+            <h6>14 Papers & Articles</h6>
+            <img
+              src="/projects/saab/img/papers.png"
+              alt="Stack of research papers and articles"
+            />
+          </div>
+        </div>
+        <div>
+          <p>
+            <b>In essence:</b> <br />
+            A design system is a collection of reusable, coherent components and
+            patterns built on fundamental rules and attributes which can be
+            combined to build interfaces in an efficient, scalable and coherent
+            manner.
+            <br />
+            <br />
+            Essentially, it functions as a platform - a common source of truth -
+            that facilitates collaboration, communication and knowledge sharing
+            within and between cross-functional product teams.
+          </p>
+          <img
+            src="/projects/saab/img/ds-categories.png"
+            alt="Model of how the different parts of the design system work together"
+          />
+        </div>
+      </div>
+      <div class="g">
+        <h5>Benchmarking</h5>
+        <p>
+          In order to understand what constitutes different design systems and
+          identify best practices regarding content, organization and structure,
+          numerous design systems were studied, five of which were selected for
+          deeper analysis.
+        </p>
+        <div class="gallery">
+          <div>
+            <img
+              src="/projects/saab/img/material.png"
+              alt="Google Material Design"
+            />
+            <p>Google</p>
+            <p><b>Material Design</b></p>
+          </div>
+          <div>
+            <img src="/projects/saab/img/carbon.png" alt="IBM Carbon" />
+            <p>IBM</p>
+            <p><b>Carbon</b></p>
+          </div>
+          <div>
+            <img src="/projects/saab/img/spectrum.png" alt="Adobe Spectcrum" />
+            <p>Adobe</p>
+            <p><b>Spectrum</b></p>
+          </div>
+          <div>
+            <img src="/projects/saab/img/fluent.png" alt="Microsoft Fluent" />
+            <p>Microsoft</p>
+            <p><b>Fluent</b></p>
+          </div>
+          <div>
+            <img src="/projects/saab/img/polaris.png" alt="Shopify Polaris" />
+            <p>Shopify</p>
+            <p><b>Polaris</b></p>
+          </div>
+        </div>
+      </div>
+      <div class="g">
+        <h5>Stakeholder Interviews</h5>
+        <div class="two-cols-50-50">
+          <div class="space-rows">
+            <blockquote>
+              “9 times out of 10, the functions should work in a certain way,
+              but that
+              <strong
+                >1 time out of 10 when it should work in a different way.
+              </strong>
+              Then you have to be able to accomplish what you want, even in that
+              exceptional case”<br />
+              <br />
+              <cite>A1 Developer</cite>
+            </blockquote>
+            <blockquote>
+              “We have put in thousands of hours in our projects. It would be
+              great if we could
+              <strong
+                >share our learnings and knowledge with others at Saab</strong
+              >
+              as well”<br />
+              <br />
+              <cite>A1 Developer</cite>
+            </blockquote>
+          </div>
+          <div class="space-rows">
+            <blockquote>
+              "What is important is that it must be mandatory to use [the design
+              system], because unless everyone uses it, I do not see the benefit
+              of it.
+              <strong>It must come from an executive level</strong>”<br />
+              <br />
+              <cite>UX Designer</cite>
+            </blockquote>
+            <blockquote>
+              “The applications work well independently, but it's strange that
+              they differ in terms of look and feel
+              <strong>Choose one and stick with it!</strong>"<br />
+              <br />
+              <cite>Operator</cite>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+      <div class="g">
+        <h5>Contextual Inquiery</h5>
+        <p>
+          In order to better understand the context and how the applications are
+          used in practice, a contextual inquiry was carried out with
+          experienced operators in a simulator designed for A1 training.
+        </p>
+        <img
+          src="/projects/saab/img/contextual_inquiry.png"
+          alt="Thesis duo and two operators during the contextual inquiry in simulators."
+          title="Contextual inquiry with radar operators in simulators"
+        />
+        <img
+          src="/projects/saab/img/context.png"
+          alt="Right: Military radar operators. Left: GlobalEye aircraft flying over city at night"
+        />
+        <div class="callout">
+          <h6>Key insights</h6>
+          <ul class="list">
+            <li>
+              A1 and A2 are often used in contextual proximity, but the same
+              operators can also be assigned to A3.
+            </li>
+            <li>
+              The work involves high cognitive load under extended periods of
+              time, day and night.
+            </li>
+            <li>
+              Operators like to set up their interface according to personal
+              preference and mission demands.
+            </li>
+            <li>The work environment is noisy and dimly lit.</li>
+          </ul>
+        </div>
+      </div>
+      <span class="divider"></span>
+      <h4>Defining the Design System</h4>
+      <div class="g">
+        <h5>Interface Audit & Analysis</h5>
+        <p>
+          An interface audit was performed by deconstructing the existing UIs
+          into components and systematically analyzing for similarities and
+          inconsistencies. This allowed the team to identify components and
+          patterns to include in the design system.
+        </p>
+        <img
+          src="/projects/saab/img/interface_audit.png"
+          alt="Interface audit of buttons across the three applications (A1, A2 and A3). It shows that buttons are visually inconsistent within and between the interfaces"
+        />
+      </div>
+      <div class="g">
+        <h5>Co-design Workshop</h5>
+        <p>
+          In order to establish a common understanding and foundation for a
+          design system for AEW&C applications, a remote workshop was held in
+          Miro with two frontend developers and one UX Designer, each
+          representing A1, A2 and A3.
+        </p>
+        <div class="two-cols-40-60">
+          <div>
+            <div class="callout">
+              <h6>Topics discussed:</h6>
+              <ul class="list">
+                <li>A common component taxonomy.</li>
+                <li>What components to include in the design system.</li>
+                <li>
+                  What developers need to use and contribute to a design system.
+                </li>
+                <li>How to enable responsiveness in the design system.</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <img
+              class="scale-75"
+              src="/projects/saab/img/workshop.png"
+              alt="Illustration of collaborating on a digital whiteboard"
+            />
+          </div>
+        </div>
+      </div>
+      <span class="divider"></span>
+      <h4>Ideation & Prototyping</h4>
+      <div class="g">
+        <h5>Sketching</h5>
+        <p>
+          While discussing the general design system architecture and how tokens
+          and components may be defined and presented in the system, sketching
+          was used to visualize ideas and align the team on a common approach.
+        </p>
+        <img src="/projects/saab/img/sketching.png" alt="Sketches of ideas" />
+      </div>
+      <div class="g">
+        <h5>Prototyping in Figma</h5>
+        <p>
+          A first iteration of the design system was prototyped in Figma.
+          Utilizing its native support for <strong>components</strong> and
+          <strong>variants</strong> combined with the
+          <strong>Figma Tokens-plugin</strong> allowed the team to iterate
+          between different levels of the system in parallel in order to ensure
+          that tokens could be combined into components, which in turn could be
+          used to build coherent interfaces.
+        </p>
+        <img
+          src="/projects/saab/img/prototyping.png"
+          alt="Screenshot of Figma with components and using Tokens Studio plug-in"
+        />
+        <img
+          src="/projects/saab/img/ds_prototype.png"
+          alt="Form pattern"
+          title="Tokens, Components, Patterns and Mockups were built in parallel. Changing a token or component automatically propagated throughout all higher abstractions of the system."
+        />
+      </div>
+      <span class="divider"></span>
+      <h4>Testing & Feedback</h4>
+      <div class="g">
+        <div class="two-cols-50-50">
+          <div class="space-rows">
+            <h5>Implementation test</h5>
+            <p>
+              To test the implementability of the design system, a workshop was
+              held with developers of A1, A2 and A3. They were tasked with
+              implementing a button component from scratch by following the
+              component specifications and guidelines. This was followed by an
+              open feedback discussion.
+            </p>
+            <img
+              src="/projects/saab/img/implementation_guidelines.png"
+              alt="Component page specifying colors, typography, usages, states, do's and donts and guidelines"
+            />
+            <div class="callout">
+              <h6>Key feedback</h6>
+              <ul class="list">
+                <li>
+                  The prototype's structure and content was understandable and
+                  relevant.
+                </li>
+                <li>
+                  Developers need even more guidelines and detailed component
+                  specifications.
+                </li>
+                <li>
+                  Developers need explicit guidelines for how to specify the
+                  code.
+                </li>
+                <li>
+                  It would be more cost effective and reliable to style
+                  preexisting components than creating a new component library
+                  from scratch.
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="space-rows">
+            <h5>Feedback presentation</h5>
+            <p>
+              As a design system involves a high level of teamwork and impacts
+              the work for many stakeholders at Saab, it was critical to gain
+              feedback and buy-in from across the entire company, including the
+              executive group. Therefore, a presentation and Q&A was held with
+              50+ employees representing various teams and domains.
+            </p>
+            <img
+              src="/projects/saab/img/feedback_presentation.png"
+              alt="Thesis duo presentating the design system to stakeholders"
+            />
+            <div class="callout">
+              <h6>Key outcomes</h6>
+              <ul class="list">
+                <li>
+                  The work was positively received across the board; from
+                  designers, developers, and product owners to managers, system
+                  engineers and executive staff.
+                </li>
+                <li>
+                  The Q&A sparked discussions around ownership, contribution,
+                  organization, and how to balance coherence and responsiveness.
+                </li>
+                <li>
+                  The discussions initiated the formation of a global,
+                  cross-functional project group that would continue the work by
+                  piloting a design system on the more coherent surface-based
+                  radar applications.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="g">
+        <div class="callout highlighted">
+          <h5>Implementation</h5>
+          <p>
+            From the implementation test it was clear that it would be
+            <b>difficult and time consuming</b> to create a new component
+            library from scratch. Therefore, it was decided that the design
+            system should be implemented using preexisting
+            <b>JComponents</b> and have a Look & Feel that allows for a high
+            degree of customization. The <b>FlatLaf Look & Feel</b> was selected
+            and combined with insights from the design research to create a new
+            iteration of the design system with
+            <b>programmed token values</b> and <b>component styles</b>.
+          </p>
+          <img
+            src="/projects/saab/img/flatlaf_editor.png"
+            alt="Background: Token values and component styles in FlatLaf Theme editor. Foreground: Styles, components and patterns in the FlatLaf Demo application"
+            title="Token values and component styles in FlatLaf Theme editor"
+          />
+        </div>
+      </div>
+
+      <h4>Design System</h4>
+      <div class="g">
+        <img
+          src="/projects/saab/img/phoenix_design_system.png"
+          alt="Design system illustration"
+        />
+      </div>
+      <div class="g">
+        <div class="ds-title">
+          <h5>Tokens</h5>
+          <span></span>
+        </div>
+      </div>
+      <div class="g ds-section">
+        <div class="space-rows">
+          <h5>Spacing, Sizing & Shape</h5>
+          <p>
+            The Design System is built on a base unit of 4x4 pixels which is
+            multiplied by a factor to create standard sizes, margins, widths,
+            radii and grids. Tokens are then combined to form components.
+          </p>
+          <img
+            src="/projects/saab/img/spacing_code.png"
+            alt="code"
+            class="code"
+          />
+        </div>
+        <img
+          src="/projects/saab/img/spacing_tokens.png"
+          alt="tokens"
+          class="tokens"
+        />
+      </div>
+      <span class="divider"></span>
+      <div class="g ds-section">
+        <div class="space-rows">
+          <h5>Typography</h5>
+          <p>
+            The typography adheres to Saab's Brand Portal which specifices the
+            Aktiv Grotesk font. It can be described as taking an authoritative
+            but neutral position, supporting any message without overpowering
+            it. The font is highly versitile and features 24 different styles.
+          </p>
+          <img
+            src="/projects/saab/img/typography_code.png"
+            alt="code"
+            class="code"
+          />
+        </div>
+        <img
+          src="/projects/saab/img/typography_tokens.png"
+          alt="tokens"
+          class="tokens"
+        />
+      </div>
+      <span class="divider"></span>
+      <div class="g">
+        <h5>Colors</h5>
+      </div>
+      <div class="g ds-section">
+        <div class="space-rows">
+          <div>
+            <h6>Primitive colors</h6>
+            <p>
+              Primitive colors provide a range of fundamental shades that define
+              how other colors within the design system are derived and
+              combined. They serve as a backbone to establish and create new
+              colors in a cohesive, flexible, and scalable manner.
+            </p>
+          </div>
+          <img
+            src="/projects/saab/img/colors_code.png"
+            alt="code"
+            class="code"
+          />
+        </div>
+        <img
+          src="/projects/saab/img/colors_tokens.png"
+          alt="tokens"
+          class="tokens"
+        />
+      </div>
+      <div class="g ds-section">
+        <div class="space-rows">
+          <div>
+            <h6>Base colors</h6>
+            <p>
+              Background and foreground colors are consistent with the dark
+              color scheme specified in Saab's Brand Portal. The dark scheme is
+              well suited for tactical applications as it is easy on the eyes
+              when working in dimmed lighting for extended periods of time. The
+              neutral base colors also make vibrant status indicators more
+              discernible.
+            </p>
+          </div>
+
+          <img
+            src="/projects/saab/img/colors_code2.png"
+            alt="code"
+            class="code"
+          />
+        </div>
+        <img
+          src="/projects/saab/img/colors_tokens2.png"
+          alt="tokens"
+          class="tokens"
+        />
+      </div>
+      <div class="g ds-section">
+        <div class="space-rows">
+          <div>
+            <h6>Semantic colors</h6>
+            <p>
+              Semantic colors are colors that carry meaning. The semantic colors
+              in the design system stays consistent with conventions for
+              tactical applications. E.g. red should only be used for errors and
+              critical alerts. Lighter and darker shades can be produced through
+              a formula where lightness and alpha values are transformed in a
+              systematic manner: <br /><br />
+            </p>
+            <ul class="list">
+              <li>
+                <b>n shades lighter = (lightness + 6, alpha + 10%) * n</b>
+              </li>
+              <li><b>n shades darker = (lightness - 6, alpha + 10%) * n</b></li>
+            </ul>
+          </div>
+        </div>
+        <img
+          src="/projects/saab/img/colors_tokens3.png"
+          alt="tokens"
+          class="tokens"
+        />
+      </div>
+      <div class="g">
+        <img
+          src="/projects/saab/img/colors_code3.png"
+          alt="tokens"
+          class="tokens"
+        />
+      </div>
+      <div class="g ds-title">
+        <h5>Components</h5>
+        <span></span>
+      </div>
+      <div class="g ds-section">
+        <div>
+          <h6>Component structure</h6>
+          <p>
+            Having defined colors, geometry, radii, border widths, and
+            typography, all components are specified by referring to tokens.
+            <br />
+            <br />
+            In effect, large visual changes can be managed with ease to suit
+            different customer requirements whilst maintaining a coherent
+            interface overall. This helps in balancing the trade-off between
+            coherence and responsiveness in terms of visual style.
+          </p>
+        </div>
+        <img
+          src="/projects/saab/img/component_code.png"
+          alt="code"
+          class="code"
+        />
+      </div>
+      <div class="g">
+        <img
+          src="/projects/saab/img/component_structure.png"
+          alt="tokens"
+          class="tokens"
+        />
+      </div>
+      <div class="g">
+        <h6>Component Library</h6>
+        <img
+          src="/projects/saab/img/component_library.png"
+          alt="component library"
+          class="tokens"
+        />
+      </div>
+      <div class="g ds-title">
+        <h5>Patterns</h5>
+        <span></span>
+      </div>
+      <div class="g three-cols">
+        <div class="space-rows top">
+          <div>
+            <h6>Forms</h6>
+          </div>
+          <div>
+            <img src="/projects/saab/img/forms.png" alt="Forms" />
+          </div>
+        </div>
+        <div class="space-rows top">
+          <div>
+            <h6>Tree navigation & Tables</h6>
+          </div>
+          <div>
+            <img
+              src="/projects/saab/img/tree_nav.png"
+              alt="Tree navigation & Tables"
+            />
+          </div>
+        </div>
+        <div class="space-rows top">
+          <div>
+            <h6>Tabs</h6>
+          </div>
+          <div>
+            <img
+              src="/projects/saab/img/tabs.png"
+              alt="Tree navigation and tables"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="g ds-title">
+        <h5>Mockup</h5>
+        <span></span>
+      </div>
+      <div class="g">
+        <img src="/projects/saab/img/mockup.png" alt="Mockup of Interface" />
+      </div>
+      <div class="g ds-title">
+        <h5>Requirements</h5>
+        <span></span>
+      </div>
+      <div class="g three-cols">
+        <div class="space-rows top">
+          <div>
+            <p>
+              The <b>requirements list</b> was iteratively compiled throughout
+              the project.
+              <br />
+              <br />
+              It specifies some of the factors that Saab should take into
+              consideration when proceeding with the development and adoption of
+              the design system.
+            </p>
+          </div>
+        </div>
+        <div class="space-rows top">
+          <img
+            src="/projects/saab/img/requirements1.png"
+            alt=""
+            id="requirements1"
+          />
+        </div>
+        <div class="space-rows top">
+          <img
+            src="/projects/saab/img/requirements2.png"
+            alt=""
+            id="requirements2"
+          />
+        </div>
+      </div>
+      <div class="white-background">
+        <div class="g">
+          <h4>Conclusion</h4>
+        </div>
+        <div class="g">
+          <div class="ds-conclusion">
+            <h6>The results</h6>
+            <p><b>This project has resulted in</b></p>
+            <ul class="icon-list">
+              <li>
+                <img src="/projects/saab/img/ds-icon-black.svg" alt="" />
+                <p>
+                  A <b>design system</b> including foundational tokens,
+                  components and patterns.
+                </p>
+              </li>
+              <li>
+                <img src="/projects/saab/img/doc-icon-black.svg" alt="" />
+                <p>
+                  A <b>requirements list</b> for how Saab may implement and
+                  manage the design system.
+                </p>
+              </li>
+              <li>
+                <img src="/projects/saab/img/ui-icon-black.svg" alt="" />
+                <p>
+                  A <b>reference UI</b> in the form of a mockup exemplifying the
+                  utilization of the design system.
+                </p>
+              </li>
+            </ul>
+            <p><b>The results are expected to</b></p>
+            <ul class="icon-list">
+              <li>
+                <img
+                  src="/projects/saab/img/shake-hands-icon-black.svg"
+                  alt=""
+                />
+                <p>
+                  Improve collaboration and resource sharing within and between
+                  product teams.
+                </p>
+              </li>
+              <li>
+                <img
+                  src="/projects/saab/img/happy-face-icon-black.svg"
+                  alt=""
+                />
+                <p>
+                  Enhance overall user experience by improving usability and
+                  coherence for radar operators.
+                </p>
+              </li>
+              <li>
+                <img src="/projects/saab/img/scale-icon-black.svg" alt="" />
+                <p>
+                  Achieve a balance between coherence and responsiveness to
+                  customer demands.
+                </p>
+              </li>
+            </ul>
+            <p>
+              The results of this project constitute a
+              <b>foundation for further development.</b> Subsequent iterations
+              are needed to be carried out by Saab in order to develop,
+              integrate, and maintain the system over time.
+            </p>
+            <img
+              src="/projects/saab/img/iterative_design_process.png"
+              alt="Illustration of an iterative cycle of the design process continuing after the thesis"
+            />
+          </div>
+
+          <div class="ds-conclusion">
+            <h6>My takeaways</h6>
+            <ul class="list">
+              <li>
+                Developed expertise in designing and managing effective design
+                systems within large organizations.
+              </li>
+              <li>
+                Gained hands-on experience collaborating with developers and
+                implementing design decisions as code.
+              </li>
+              <li>
+                Learned to leverage Figma components, variants, properties, and
+                plug-ins to create coherent, flexible, and reusable designs.
+              </li>
+              <li>
+                Aquired appreciation for complex software development in
+                customer-driven projects with many stakeholders and constraints.
+              </li>
+
+              <li>
+                Gained a more holistic understanding of product development,
+                considering how my design impacts different stakeholders.
+              </li>
+              <li>
+                Improved ability to independently plan and lead the design
+                process, including method selection, time and scope management,
+                workshop facilitation, user research, and addressing conflicting
+                stakeholder needs.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="g" id="disclaimer">
+          <p>
+            <b>Disclaimer:</b><br />
+            Due to the confidential nature of Saab's business, some parts of
+            this work have been omitted or altered to protect sensitive
+            information
+          </p>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      property="og:image"
+      content="https://mattiasnils.com/public/img/timeout-thumbnail.png"
+    />
+    <title>Mattias Nilsson > TimeOut</title>
+    <base href="/" />
+    <link rel="stylesheet" href="./resetStyles.css" />
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="projects/timeout/timeout.css" />
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+    <script defer src="nav.js"></script>
+    <script>
+      (function (h, o, t, j, a, r) {
+        h.hj =
+          h.hj ||
+          function () {
+            (h.hj.q = h.hj.q || []).push(arguments);
+          };
+        h._hjSettings = { hjid: 3794888, hjsv: 6 };
+        a = o.getElementsByTagName("head")[0];
+        r = o.createElement("script");
+        r.async = 1;
+        r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+        a.appendChild(r);
+      })(window, document, "https://static.hotjar.com/c/hotjar-", ".js?sv=");
+    </script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="menu-icon">
+          <input class="menu-icon__cheeckbox" type="checkbox" />
+          <div>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <ul>
+          <li><a href="index.html#play">Home</a></li>
+          <li><a href="/projects/games/games.html">⬅︎</a></li>
+          <li>
+            <a href="/projects/spotify/spotify.html">⮕</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="project-intro">
+        <div class="headline animate-pop-up">
+          <h1>TimeOut</h1>
+          <h2>Design for healthier screen habits</h2>
+        </div>
+        <img
+          id="hero"
+          src="/projects/timeout/img/timeout-hero.png"
+          alt="A laptop displaying a large timer in the form of a circular progress bar with the time 01:49 in the center. Below it is a button labeled End Break"
+        />
+        <div class="project-summary">
+          <h3>Summary</h3>
+          <p>A concept feature to promote healthier screen time habits across Apple's ecosystem.</p>
+          <h3>Year</h3>
+          <p>2024</p>
+          <h3>Duration</h3>
+          <p>~4 days</p>
+          <h3>Tools</h3>
+          <div class="tools-row">
+            <div class="tool-icon">
+              <img src="/public/icons/figma-icon.svg" alt="Figma icon" />
+              <p>Figma</p>
+          </div>
+        </div>
+      </div>
+      <span class="divider"></span>
+      <h4>Background</h4>
+      <div class="g">
+        <div>
+          <h5>Problem</h5>
+          <p>
+            The modern digital era has created many opportunities for people to get lost in digital experiences. Wether it is focused work, gaming or media consumption, these activities all pose challenges to maintaining a healthy screen time as individuals tend to lose track of time, neglect breaks, and compromise physical and social well-being.
+          </p>
+          
+          <img class="r"
+          src="/projects/timeout/img/working.jpeg"
+          alt="Woman in dreads and black hoodie sitting at a desk, working in a video editing program on a desktop computer"
+        />
+        <p>
+          Current tools designed to limit screen time only allow users to set time limits. These time limits are defined in terms of total app or system usage during a day, but don't account for whether the user is spending long consecutive periods at a time without breaks. Apple's Screen Time also resets at midnight, making it easy to unintentionally spend more time than intended around this hour.
+        </p>
+        <img 
+          class="r"
+          src="/projects/timeout/img/time-limit.png"
+          alt="MacOS Time Limit with text explaining that you've reached your limit on Final Cut Pro. Two accomanying buttons with labels OK and Ask For More Time"
+        />
+        <p>
+          The "Time to Stand" feature on Apple Watch is generally a good solution as it intelligently reminds the wearer to stand up and move around every hour - which indirectly encourages taking a break. However, this feature currenly requires an Apple Watch and it doesn't take into account what the user is doing.
+        </p>
+        <img 
+          class="r"
+          src="/projects/timeout/img/stand-reminder.png"
+          alt="Apple Watch stand up reminder with message: Time to stand! Stand up and move a little for one minute."
+        />
+        </div>
+        <h4>Research & Ideation</h4>
+        <h5>Market analysis</h5>
+        <p>Nintendo Wii and Switch prompts users to take regular breaks during and between gameplay.</p>
+        <div class="two-cols-50-50">
+            <div>
+              <img
+                src="/projects/timeout/img/wii-break.png"
+                alt="A Nintendo Wii modal window with the text: Please go touch tome grass. You can pause the game by pressing the plus-button. Press A to continue."
+              />
+            </div>
+          <div>
+            <img
+              src="/projects/timeout/img/switch-break.png"
+              alt="A Nintendo Switch modal window with the text: You've played for an hour straight. Is it time for a break? Two buttons respectively labeled Continue and Take a break."
+            />
+          </div>
+        </div>
+        <h5>Brainstorm</h5>
+        <img class="r"
+          src="/projects/timeout/img/brainstorm.png"
+          alt="A brainstorm whiteboard on the theme of Mindful Screen Time. Ideas include Breaks, Reminders, Settings, System message, Ending breaks and Making users feel good about non-screen time."
+        />
+        <h4>Prototyping</h4>
+        <h5>Wireflow</h5>
+        A wireflow was made in Figma to quickly visualize the different steps and prototype what the available user actions would be in each step.
+        <img class="r"
+          src="/projects/timeout/img/Wireflow.png"
+          alt="Three steps showing 1. A desktop layout 2. A prompt to take a break 3. A timer counting down"
+        />
+        <h5>Interactive prototype</h5>
+        <p>
+          A high-fidelity interactive prototype was made in Figma using assets from Apple's Design Library. The goal was to get a sense of how the feature would look and feel if Apple would implement it.
+        </p>
+        <img
+          src="/projects/timeout/img/interactive-prototype1.png"
+          alt="A Figma screenshot of high-fidelity prototypes built using Apple's Design Library."
+        />
+        <video src="/projects/timeout/img/timeout-v1.mov" class="r" type="video/mov" autoplay="false" controls
+        controlsList="nodownload" loop="true"  width="100%" alt="Video showcasing the key interactions: 1. Being prompted to take a break 2. Confirming to start the break 3. Taking a break"></video>
+        <div class="callout">
+          <p>
+            Using the prototype led to a few realizations:
+          </p>
+          <ul class="list">
+            <li>It's jarring to have the "Time for a Break" suddenly take over the whole screen</li>
+            <li>It feels redundant to require a confirmation of starting the break</li>
+            <li>Encouraging the user to move, breathe and hydrate is unnecessary</li>
+          </ul>
+        </div>
+        <div class="spacer-2"></div>
+        <h5>Iteration</h5>
+        <p>
+          From the insights gathered by the interactive prototype, new iterations were created with a focus on refining the flow and UI:
+        </p>
+        <div class="spacer-2"></div>
+        <h6>Break screen iterations</h6>
+        <div class="three-cols">
+          <div>
+            <img
+              src="/projects/timeout/img/Break 2.png"
+              alt="Iteration 1: a large timer in the form of a circular progress bar with the time 01:49 in the center. Below it is a button labeled End Break"
+            />
+            <p>
+              <b>Iteration 2:</b> A larger and less cluttered progress indication.
+            </p>
+          </div>
+          <div>
+            <img
+              src="/projects/timeout/img/Break 2.1.png"
+              alt="Iteration 2: a large timer in the form of a circular progress bar, rounded end-caps and purple color, with the time 01:49 in the center. Below it is a button labeled End Break"
+            />
+            <p>
+              <b>Iteration 3:</b> More prominent and on-brand with Screen Time.
+            </p>
+          </div>
+          <div>
+            <img
+              src="/projects/timeout/img/Break 2.2.png"
+              alt="Iteration 3: a large timer in the form of a circular progress bar, rounded end-caps and purple color, with an outline for the progress indicaition. Time 01:49 in the center. Below it is a button labeled End Break"
+            />
+            <p>
+              <b>Iteration 4:</b> Adding an outline for the progress indication.
+            </p>
+          </div>
+        </div>
+        <h4>Final Design</h4>
+        
+        <video src="/projects/timeout/img/timeout-v2.mov" class="r" type="video/mov" controls
+        controlsList="nodownload" autoplay="false" loop="true"  width="100%" alt="Video showing key interactions of final design. 1. A notification appears on the top right hand side of the desktop. 2. Hovering over notification reveals options. 3. Options Snooze for 2 minutes, Skip break and settings are revealed, user presses Snooze. 4. Notification reappears a moment later followed by a countdown. 5. TimeOut initiates, displaying a large countdown starting at 10 minutes. 6. Countdown reaches end and the desktop reappears. 7. User hovers the Screen Time status menu icon and selects Start Break now. 8. A new 10-minute break is initiated."></video>
+        <h5>Overview</h5>
+        <!-- <p>The final design replaces the abrupt full-screen break prompt with a system notification, similar to how macOS currenly handles an imminent system restart.</p> -->
+        <div class="spacer-2"></div>
+        <div class="two-cols-50-50">
+          <div>
+            <img 
+              class="r"
+              src="/projects/timeout/img/notification-options.png"
+              alt="Mac notification with the options: Snooze for 2 minutes, Skip Break and Settings"
+            />
+          </div>
+          <div>
+            <h6>Notification</h6>
+            <p>A system notification gives the user 30 seconds to mentally prepare for the break. The break can either be snoozed for 2 minutes at a time or skipped entierly.</p>
+          </div>
+        </div>
+        <div class="spacer-2"></div>
+        <div class="two-cols-50-50">
+          <div>
+            <h6>Status menu</h6>
+            <p>From the status menu, users can see their total screen time and time until next break. They can also choose to start a break manually, restart break period or open Screen Time settings.</p>
+          </div>
+          <div>
+            <img 
+              class="r"
+              src="/projects/timeout/img/statusbar.png"
+              alt="Status menu icon in the form of the Screen Time glyph. The menu contains the total screen time of 1 hour and 53 minutes, Next break in 7 minutes. Options are Start Break Now, Restart Break Period and Screen Time Settings"
+            />
+          </div>
+        </div>
+        <div class="spacer-2"></div>
+        <div class="spacer-2"></div>
+        <div class="spacer-2"></div>
+        <h6>Preferences</h6>
+        <p>TimeOut can be customized according to individual needs in the Screen Time section in System Preferences. Users can adjust the frequency and duration of breaks, choose wether to allow for snoozing or if the break timer automatically resets on inactivity. </p>
+        <img 
+              src="/projects/timeout/img/settings-screentime.png"
+              alt="Mac System Preferences with Screen Time selected. A list of options for different screen time related preferences, including TimeOut."
+            />
+        <img 
+              src="/projects/timeout/img/settings-timeout.png"
+              alt="Mac System Preferences with TimeOut selected. A list of options for frequency and duration of breaks, Allow Snooze and Idle Reset."
+            />
+        <div class="spacer"></div>
+        <h5>Considerations</h5>
+        <p>Beyond the visual design of TimeOut, the system should also take into account whether the user is doing something that should not be interrupted. This includes activities like:</p>
+        <ul class="list">
+          <li>Having a phone call</li>
+          <li>Using navigation</li>
+          <li>Using camera</li>
+          <li>Recording</li>
+          <li>Exercising</li>
+          <li>In gameplay</li>
+        </ul>
+        <p>To ensure that TimeOut doesn't interrupt these kinds of activities, the operating system should check if the microphone, camera or gyroscope (on mobile devices) is being used. Also, application type can be used to determine weather it's a good or bad time to suggest a break.  
+          <br><br>
+          Furthermore, applications could be given access to a TimeOut API that enables developers the possibility to prevent TimeOut from being invoked during specific parts of an app experience.
+        </p>
+      </div>
+    </main>
+  </body>
+</html>

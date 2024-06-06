@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:serif="http://www.serif.com/" width="24px" height="24px" viewBox="0 0 500 500" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,0,-1500)">
+        <g id="Icon__AffinityDesigner__DesignerPersona" transform="matrix(1.15207,0,0,1.15207,0,-255.76)">
+            <rect x="0" y="1524" width="434" height="434" style="fill:none;"/>
+            <clipPath id="_clip1">
+                <rect x="0" y="1524" width="434" height="434"/>
+            </clipPath>
+            <g clip-path="url(#_clip1)">
+                <g id="RectangleMask" transform="matrix(1.13021,0,0,1.13021,-46.3385,1503.66)">
+                    <rect x="41" y="18" width="384" height="384" style="fill:rgba(255,255,255,0.1);"/>
+                    <clipPath id="_clip2">
+                        <rect x="41" y="18" width="384" height="384"/>
+                    </clipPath>
+                    <g clip-path="url(#_clip2)">
+                        <g transform="matrix(1,0,0,1,13,0)">
+                            <path d="M191.365,168.116L241.84,255L176,255C164.962,255 156,246.038 156,235C156,231.718 156.792,228.62 158.195,225.888L191.365,168.116Z" style="fill:rgb(255,255,255);"/>
+                        </g>
+                        <g transform="matrix(1,0,0,1,13,0)">
+                            <path d="M199.988,153.098L281,12L430,12L430,255L259.188,255L199.988,153.098Z" style="fill:rgb(255,255,255);"/>
+                        </g>
+                        <path d="M443,271L155,271L237,415L443,415L443,271Z" style="fill:rgb(255,255,255);"/>
+                        <path d="M220,415L29,415L29,339L217,12L277,12L132,262L220,415Z" style="fill:rgb(255,255,255);"/>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
