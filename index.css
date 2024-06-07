@@ -603,8 +603,8 @@ footer p {
   gap: 0.5rem;
   padding: 0.25rem 1rem;
   background-color: rgb(146, 159, 169);
-  /* background-color: rgb(0, 0, 0); */
   border-radius: 0.5rem;
+  transition: all 0.2s ease-in-out;
 }
 
 .tool-icon p {
@@ -677,6 +677,13 @@ footer p {
   #contact-button:focus {
     box-shadow: 0px 4px 15px rgba(6, 93, 174, 0.2);
     cursor: pointer;
+    transform: scale(1.05);
+  }
+
+  .tool-icon:hover,
+  .tools-icon:focus {
+    box-shadow: 0px 4px 15px rgba(6, 93, 174, 0.2);
+    cursor: default;
     transform: scale(1.05);
   }
 }
