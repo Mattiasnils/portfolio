@@ -196,7 +196,7 @@ nav a {
 @media (hover: hover) {
   nav a:hover,
   nav a:focus {
-    font-size: 1.15rem;
+    /* font-size: 1.15rem; */
     transform: scale(1.15);
     box-shadow: 0px 2px 10px rgba(6, 93, 174, 0.5);
   }
@@ -204,7 +204,7 @@ nav a {
 
 nav a:active {
   box-shadow: none;
-  font-size: 1.05rem;
+  /* font-size: 1.05rem; */
   transform: scale(1.05);
   color: white;
   background-color: var(--active);
@@ -212,7 +212,8 @@ nav a:active {
 
 nav .link-active {
   background-color: var(--active);
-  font-size: 1.05rem;
+  /* font-size: 1.05rem; */
+  transform: scale(1.05);
   font-weight: bold;
   text-decoration: dashed;
 }
