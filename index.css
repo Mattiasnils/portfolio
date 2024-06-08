@@ -205,6 +205,7 @@ nav a {
 nav a:active {
   box-shadow: none;
   font-size: 1.05rem;
+  transform: scale(1.05);
   color: white;
   background-color: var(--active);
 }
