@@ -199,6 +199,11 @@ nav a {
     font-size: 1.15rem;
     box-shadow: 0px 2px 10px rgba(6, 93, 174, 0.5);
   }
+
+  nav a > img:hover,
+  nav a > img:focus {
+    transform: scale(1.15);
+  }
 }
 
 nav a:active {
