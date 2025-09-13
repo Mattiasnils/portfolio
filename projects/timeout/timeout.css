@@ -2,22 +2,6 @@
   --purple: rgb(76, 97, 222);
   --grey-text: rgb(130, 130, 130);
   --grey-bg: rgb(36, 36, 35);
-  --primary: black;
-}
-
-nav {
-  box-shadow: unset;
-}
-
-nav a {
-  background-color: var(--primary);
-  color: white;
-}
-
-nav a:active,
-nav a:focus,
-nav a:hover {
-  box-shadow: unset;
 }
 
 .menu-icon span {

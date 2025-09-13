@@ -2,22 +2,6 @@
   --yellow: rgb(255, 183, 0);
   --grey-text: rgb(130, 130, 130);
   --grey-bg: rgb(36, 36, 35);
-  --primary: black;
-}
-
-nav {
-  box-shadow: unset;
-}
-
-nav a {
-  background-color: black;
-  color: white;
-}
-
-nav a:active,
-nav a:focus,
-nav a:hover {
-  box-shadow: unset;
 }
 
 .menu-icon span {
