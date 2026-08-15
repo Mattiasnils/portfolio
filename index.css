@@ -1514,6 +1514,11 @@ body.lightbox-open {
 .contact-modal {
   position: fixed;
   inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: -webkit-fill-available;
+  min-height: 100dvh;
+  min-height: 100lvh;
   z-index: 2100;
   display: flex;
   align-items: center;
@@ -1523,6 +1528,7 @@ body.lightbox-open {
     max(1rem, env(safe-area-inset-bottom))
     max(1rem, env(safe-area-inset-left));
   box-sizing: border-box;
+  overscroll-behavior: none;
 }
 
 .contact-modal[hidden] {
@@ -1531,7 +1537,10 @@ body.lightbox-open {
 
 .contact-modal-scrim {
   position: absolute;
-  inset: 0;
+  top: calc(-1 * env(safe-area-inset-top, 0px));
+  right: calc(-1 * env(safe-area-inset-right, 0px));
+  bottom: calc(-1 * env(safe-area-inset-bottom, 0px));
+  left: calc(-1 * env(safe-area-inset-left, 0px));
   background: rgba(7, 10, 14, 0.72);
   backdrop-filter: blur(0.45rem) saturate(1.05);
   -webkit-backdrop-filter: blur(0.45rem) saturate(1.05);
@@ -1547,6 +1556,8 @@ body.lightbox-open {
   width: min(92vw, 34rem);
   max-height: calc(100dvh - 2rem);
   overflow: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   box-sizing: border-box;
   padding: 1.5rem 1.5rem 1.75rem;
   border-radius: 2rem;
@@ -1731,8 +1742,21 @@ body.lightbox-open {
   color: rgb(170, 40, 40);
 }
 
+html.contact-modal-open {
+  background: var(--page-bg);
+}
+
+html.contact-modal-open,
 body.contact-modal-open {
   overflow: hidden;
+  overscroll-behavior: none;
+}
+
+body.contact-modal-open {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  right: 0;
 }
 
 @media (max-width: 500px) {
@@ -1740,13 +1764,23 @@ body.contact-modal-open {
     padding: 0;
     align-items: stretch;
     justify-content: stretch;
+    background: var(--page-bg);
+  }
+
+  .contact-modal-scrim {
+    background: var(--page-bg);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .contact-modal-panel {
     width: 100%;
-    height: 100dvh;
+    height: 100%;
     max-height: none;
+    min-height: 100%;
+    flex: 1 1 auto;
     border-radius: 0;
+    background: var(--page-bg);
     padding:
       max(1.25rem, env(safe-area-inset-top))
       max(1.1rem, env(safe-area-inset-right))

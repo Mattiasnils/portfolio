@@ -41,6 +41,61 @@
 
     let lastFocusedElement = null;
     let showingSuccess = false;
+    let savedScrollX = 0;
+    let savedScrollY = 0;
+
+    function clearModalViewportStyles() {
+      modal.style.top = "";
+      modal.style.left = "";
+      modal.style.right = "";
+      modal.style.bottom = "";
+      modal.style.width = "";
+      modal.style.height = "";
+      modal.style.minHeight = "";
+    }
+
+    function syncModalToVisualViewport() {
+      if (modal.hidden || !window.visualViewport) {
+        return;
+      }
+
+      const viewport = window.visualViewport;
+      const keyboardOpen =
+        viewport.offsetTop > 0 ||
+        viewport.offsetLeft > 0 ||
+        window.innerHeight - viewport.height > 40;
+
+      if (keyboardOpen) {
+        modal.style.top = viewport.offsetTop + "px";
+        modal.style.left = viewport.offsetLeft + "px";
+        modal.style.right = "auto";
+        modal.style.bottom = "auto";
+        modal.style.width = viewport.width + "px";
+        modal.style.height = viewport.height + "px";
+        modal.style.minHeight = "0px";
+      } else {
+        clearModalViewportStyles();
+      }
+    }
+
+    function lockPageScroll() {
+      savedScrollX = window.scrollX;
+      savedScrollY = window.scrollY;
+      document.documentElement.classList.add("contact-modal-open");
+      document.body.classList.add("contact-modal-open");
+      document.body.style.top = "-" + savedScrollY + "px";
+      document.body.style.left = "-" + savedScrollX + "px";
+      syncModalToVisualViewport();
+    }
+
+    function unlockPageScroll() {
+      clearModalViewportStyles();
+      document.documentElement.classList.remove("contact-modal-open");
+      document.body.classList.remove("contact-modal-open");
+      document.body.style.top = "";
+      document.body.style.left = "";
+      window.scrollTo(savedScrollX, savedScrollY);
+    }
 
     function getFocusableElements() {
       const panel = showingSuccess ? successPanel : formPanel;
@@ -81,19 +136,19 @@
 
       if (!name) {
         setStatus("Please enter your name.", "error");
-        fields.name.focus();
+        fields.name.focus({ preventScroll: true });
         return null;
       }
 
       if (!email || !EMAIL_PATTERN.test(email)) {
         setStatus("Please enter a valid email address.", "error");
-        fields.email.focus();
+        fields.email.focus({ preventScroll: true });
         return null;
       }
 
       if (!message) {
         setStatus("Please enter a message.", "error");
-        fields.message.focus();
+        fields.message.focus({ preventScroll: true });
         return null;
       }
 
@@ -133,7 +188,7 @@
       window.setTimeout(function () {
         const successClose = successPanel.querySelector(".interests-lightbox-close");
         if (successClose) {
-          successClose.focus();
+          successClose.focus({ preventScroll: true });
         }
       }, 0);
     }
@@ -142,21 +197,21 @@
       lastFocusedElement = document.activeElement;
       showFormView();
       modal.hidden = false;
-      document.body.classList.add("contact-modal-open");
+      lockPageScroll();
       window.setTimeout(function () {
-        fields.name.focus();
+        fields.name.focus({ preventScroll: true });
       }, 0);
     }
 
     function closeModal() {
       modal.hidden = true;
-      document.body.classList.remove("contact-modal-open");
+      unlockPageScroll();
       showFormView();
       setSending(false);
       setStatus("");
 
       if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
-        lastFocusedElement.focus();
+        lastFocusedElement.focus({ preventScroll: true });
       }
     }
 
@@ -185,10 +240,10 @@
 
       if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
-        last.focus();
+        last.focus({ preventScroll: true });
       } else if (!event.shiftKey && document.activeElement === last) {
         event.preventDefault();
-        first.focus();
+        first.focus({ preventScroll: true });
       }
     }
 
@@ -236,6 +291,33 @@
       }
     }
 
+    function handleTouchMove(event) {
+      if (modal.hidden) {
+        return;
+      }
+
+      const target = event.target;
+      if (
+        target &&
+        (target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.tagName === "SELECT")
+      ) {
+        return;
+      }
+
+      const panel = showingSuccess ? successPanel : formPanel;
+      if (
+        panel &&
+        panel.contains(target) &&
+        panel.scrollHeight > panel.clientHeight + 1
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+    }
+
     openButton.addEventListener("click", openModal);
     closeButtons.forEach(function (button) {
       button.addEventListener("click", closeModal);
@@ -247,5 +329,11 @@
     });
     form.addEventListener("submit", handleSubmit);
     document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("touchmove", handleTouchMove, { passive: false });
+    window.addEventListener("resize", syncModalToVisualViewport);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", syncModalToVisualViewport);
+      window.visualViewport.addEventListener("scroll", syncModalToVisualViewport);
+    }
   });
 })();
