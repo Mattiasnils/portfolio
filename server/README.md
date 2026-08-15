@@ -24,7 +24,7 @@ Complete these steps in order. Emails will **not** work until all of them are do
 4. Render reads [`render.yaml`](../render.yaml) and creates `portfolio-contact-api`.
 5. When prompted, set **`RESEND_API_KEY`** to your Resend key.
 6. Click **Apply**. Wait for the deploy to finish.
-7. Copy your service URL (should be `https://portfolio-contact-api.onrender.com`).
+7. Copy your service URL (should be `https://portfolio-contact-api-hfwe.onrender.com`).
 
 **Option B — Manual web service**
 
@@ -48,7 +48,7 @@ Complete these steps in order. Emails will **not** work until all of them are do
 Replace the URL if yours differs:
 
 ```bash
-curl https://portfolio-contact-api.onrender.com/health
+curl https://portfolio-contact-api-hfwe.onrender.com/health
 ```
 
 Expected: `{"ok":true}`
@@ -56,7 +56,7 @@ Expected: `{"ok":true}`
 Send a test email:
 
 ```bash
-curl -X POST https://portfolio-contact-api.onrender.com/api/contact \
+curl -X POST https://portfolio-contact-api-hfwe.onrender.com/api/contact \
   -H "Content-Type: application/json" \
   -H "Origin: https://mattiasnils.github.io" \
   -d '{"name":"Test","email":"you@example.com","message":"Hello from curl"}'
@@ -73,7 +73,7 @@ In [`index.html`](../index.html), set the meta tag to your Render URL:
 ```html
 <meta
   name="contact-api-url"
-  content="https://portfolio-contact-api.onrender.com"
+  content="https://portfolio-contact-api-hfwe.onrender.com"
 />
 ```
 

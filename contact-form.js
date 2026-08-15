@@ -11,7 +11,7 @@
       return configured.trim().replace(/\/$/, "");
     }
 
-    return "https://portfolio-contact-api.onrender.com";
+    return "https://portfolio-contact-api-hfwe.onrender.com";
   }
 
   const CONTACT_API_URL = getContactApiUrl();
