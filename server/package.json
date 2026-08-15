@@ -1,0 +1,21 @@
+{
+  "name": "portfolio-contact-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "resend": "^4.1.2",
+    "ua-parser-js": "^2.0.3"
+  },
+  "devDependencies": {
+    "supertest": "^7.0.0"
+  }
+}

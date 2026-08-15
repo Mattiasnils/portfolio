@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      property="og:image"
+      content="https://mattiasnils.github.io/portfolio/public/img/atlascopco-thumbnail.png"
+    />
+    <title>Mattias Nilsson > Atlas Copco</title>
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#070a0e" />
+    <script>
+      (function () {
+        var path = location.pathname;
+        var marker = "/portfolio/";
+        var portfolioRoot;
+
+        if (path.indexOf(marker) !== -1) {
+          portfolioRoot = path.slice(0, path.indexOf(marker) + marker.length);
+        } else {
+          var nestedMatch = path.match(/^(.*)\/(projects|blog)\//);
+          portfolioRoot = nestedMatch ? nestedMatch[1] + "/" : "/";
+        }
+
+        if (portfolioRoot.charAt(0) !== "/") {
+          portfolioRoot = "/" + portfolioRoot;
+        }
+
+        var base = document.createElement("base");
+        base.href = location.origin + portfolioRoot;
+        document.head.appendChild(base);
+      })();
+    </script>
+    <link rel="stylesheet" href="resetStyles.css" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="projects/atlascopco/atlascopco.css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <script src="nav-boot.js"></script>
+    <script>
+      (function (h, o, t, j, a, r) {
+        h.hj =
+          h.hj ||
+          function () {
+            (h.hj.q = h.hj.q || []).push(arguments);
+          };
+        h._hjSettings = { hjid: 3794888, hjsv: 6 };
+        a = o.getElementsByTagName("head")[0];
+        r = o.createElement("script");
+        r.async = 1;
+        r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+        a.appendChild(r);
+      })(window, document, "https://static.hotjar.com/c/hotjar-", ".js?sv=");
+    </script>
+  </head>
+  <body>
+    <header data-nav-mount data-mega-nav data-nav-backdrop="dark"></header>
+    <main>
+      <div class="project-intro">
+        <div class="headline animate-pop-up">
+          <h1>Atlas Copco</h1>
+          <h2>Ecosystem experience for industrial tools</h2>
+        </div>
+        <img
+          id="hero"
+          src="projects/atlascopco/img/xb-tool-system.jpg"
+          alt="Connected industrial assembly tools and controllers"
+          class="r"
+        />
+        <div class="project-summary">
+          <h3>Summary</h3>
+          <div>
+            <p>
+              Developed connected product ecosystems for global industrial
+              customers. Collaborated across marketing and R&amp;D to translate
+              complex systems and workflows into clear, efficient user
+              experiences. Over ~2.5 years I worked concurrently across
+              controller software (Px2), the XB tool family, and a portfolio
+              design system.
+            </p>
+            <ul class="list">
+              <li>
+                Led UX for the XB tool family’s configuration UI and tool
+                display — Red Dot Design Award 2026.
+              </li>
+              <li>
+                Designed features for Px2 (Power Focus 8 / IxB controller
+                software), including customer-specific work tied to a €1B+
+                frame agreement.
+              </li>
+              <li>
+                Migrated and redesigned SyncMode configuration from ToolsTalk
+                into PF8.
+              </li>
+              <li>Co-built an ITBA design system from 0→1.</li>
+            </ul>
+          </div>
+          <h3>Role</h3>
+          <p>UX Designer, Industrial Technique</p>
+          <h3>Year</h3>
+          <p>2024–</p>
+          <h3>Tools</h3>
+          <div class="tools-row">
+            <div class="tool-badge" data-tool-backdrop="dark">
+              <img src="public/icons/figma-icon.svg" alt="Figma" />
+              <p>Figma</p>
+            </div>
+            <div class="tool-badge" data-tool-backdrop="dark">
+              <img src="public/icons/miro-icon.svg" alt="Miro" />
+              <p>Miro</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="divider"></span>
+
+      <!-- ========== ITBA CONTEXT ========== -->
+      <h4>Atlas Copco Industrial Technique</h4>
+      <div class="g">
+        <h5>Background</h5>
+        <p>
+          Atlas Copco Industrial Technique (ITBA) builds industrial assembly
+          solutions used in plants worldwide — tools, controllers, configuration
+          software, and tightening analysis.
+        </p>
+        <p>
+          At its core, the work is about tightenings: setting up programs,
+          running them on the line, giving operators clear feedback, and tracking
+          quality. That spans people on the plant floor as well as Customer
+          Centers supporting sites globally.
+        </p>
+        <img
+          class="r"
+          src="projects/atlascopco/img/pf8-ecosystem.png"
+          alt="Power Focus 8 ecosystem overview showing connected tools and controllers"
+        />
+        <figure class="img-placeholder">
+          <div class="img-placeholder-inner">
+            <p class="img-placeholder-label">Placeholder</p>
+            <p>
+              Simple overview of how tools, controllers, and software fit
+              together in the ITBA ecosystem.
+            </p>
+          </div>
+          <figcaption>
+            Suggested: high-level ecosystem map — or refine
+            <code>pf8-ecosystem.png</code> / station shots.
+          </figcaption>
+        </figure>
+      </div>
+
+      <!-- ========== SCOPE ========== -->
+      <span class="divider"></span>
+      <h4>Scope of work</h4>
+      <div class="g">
+        <p>
+          I worked across three streams at once, often switching between them
+          day to day.
+        </p>
+        <div class="scope-map three-cols">
+          <div class="scope-card">
+            <h6>Px2</h6>
+            <p>Features and UX for the PF8 / IxB controller software.</p>
+          </div>
+          <div class="scope-card">
+            <h6>XB tool family</h6>
+            <p>Tool display and configuration UI for XTB and XCB.</p>
+          </div>
+          <div class="scope-card">
+            <h6>Design system</h6>
+            <p>Tokens, components, and docs across the ITBA portfolio.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== PX2 ========== -->
+      <span class="divider"></span>
+      <h4>Px2 — Controller software for Power Focus 8</h4>
+      <div class="g">
+        <h5>Background</h5>
+        <p>
+          Px2 is the controller software that runs on Power Focus 8 and IxB
+          tools. It’s where technicians configure tightenings and where operators
+          get feedback on the result.
+        </p>
+
+        <h5>Customer-specific result &amp; feedback experience</h5>
+        <h6>Background</h6>
+        <p>
+          A large international car manufacturer asked for custom functionality
+          across both the controller and tool result views — the feedback
+          operators get when they tighten — in order to renew their frame
+          agreement.
+        </p>
+        <p>
+          I was part of the early discussions with our local Customer Center
+          (service engineers and sales). It didn’t take long to realize we needed
+          more intimate research directly with the customer. So I took the
+          initiative to arrange a factory visit: walking the line, interviewing
+          people on site, and co-designing with interactive prototypes in a
+          workshop.
+        </p>
+        <p>
+          That let us build detailed flows and concepts around their specific
+          needs. We kept iterating with the Customer Center before
+          implementation. Because the research was thorough, the functionality
+          fit — and that contributed to a new frame agreement worth €1B+.
+        </p>
+
+        <div class="two-cols-50-50">
+          <figure class="img-placeholder">
+            <div class="img-placeholder-inner">
+              <p class="img-placeholder-label">Placeholder</p>
+              <p>
+                Process diagram or anonymized factory context — no badges,
+                branding, or identifiable line layout.
+              </p>
+            </div>
+            <figcaption>
+              Suggested: research journey diagram (CC → factory visit →
+              co-design → iteration).
+            </figcaption>
+          </figure>
+          <figure class="img-placeholder">
+            <div class="img-placeholder-inner">
+              <p class="img-placeholder-label">Placeholder</p>
+              <p>
+                Workshop still: interactive prototype used during co-design with
+                the customer.
+              </p>
+            </div>
+            <figcaption>
+              Suggested: prototype-on-table or workshop board (faces/branding
+              cropped).
+            </figcaption>
+          </figure>
+        </div>
+
+        <figure class="img-placeholder">
+          <div class="img-placeholder-inner">
+            <p class="img-placeholder-label">Placeholder</p>
+            <p>
+              Key screens: anonymized controller result view and tool result
+              view — the custom operator feedback experience.
+            </p>
+          </div>
+          <figcaption>
+            Suggested: side-by-side controller + tool result UI (scrubbed of
+            customer-specific labels if required).
+          </figcaption>
+        </figure>
+
+        <h5>SyncMode migration &amp; redesign</h5>
+        <h6>Background</h6>
+        <p>
+          I also migrated and redesigned SyncMode from ToolsTalk over to PF8 —
+          to support extended functionality while improving the experience.
+        </p>
+        <p>
+          SyncMode is how technicians set up concurrent program execution in
+          fixtured tool systems, including termination and repair paths, using a
+          drag-and-drop node interface.
+        </p>
+        <p>
+          I researched the feature with internal Tightening Technicians, then
+          built iterative prototypes and refined them with feedback until the
+          interface could carry the added complexity without becoming harder to
+          use.
+        </p>
+
+        <div class="callout">
+          <p>
+            <strong>Challenge:</strong> This is the most complex feature I’ve
+            ever worked on. The domain is inherently hard — and the technical
+            constraints and design language weren’t really made for this kind of
+            functionality.
+          </p>
+        </div>
+
+        <div class="two-cols-50-50">
+          <figure class="img-placeholder">
+            <div class="img-placeholder-inner">
+              <p class="img-placeholder-label">Placeholder</p>
+              <p>ToolsTalk SyncMode (legacy reference) — cropped if needed.</p>
+            </div>
+            <figcaption>Suggested: legacy SyncMode UI for contrast.</figcaption>
+          </figure>
+          <figure class="img-placeholder">
+            <div class="img-placeholder-inner">
+              <p class="img-placeholder-label">Placeholder</p>
+              <p>Early wireflow or node-graph exploration.</p>
+            </div>
+            <figcaption>Suggested: low-fidelity node layout exploration.</figcaption>
+          </figure>
+        </div>
+
+        <figure class="img-placeholder">
+          <div class="img-placeholder-inner">
+            <p class="img-placeholder-label">Placeholder</p>
+            <p>
+              Final PF8 SyncMode UI — drag-and-drop concurrent programs with
+              clear termination and repair paths.
+            </p>
+          </div>
+          <figcaption>
+            Suggested: hero screenshot of the redesigned SyncMode interface;
+            optional annotated callouts for repair/termination clarity.
+          </figcaption>
+        </figure>
+      </div>
+
+      <!-- ========== XB ========== -->
+      <span class="divider"></span>
+      <h4>XB — Cordless tools for everyday assembly</h4>
+      <div class="g">
+        <h5>Background</h5>
+        <p>
+          The idea behind XB was an affordable cordless tool family for C-class
+          (customer-critical) and B-class (quality-critical) joints — as opposed
+          to the more expensive IxB family, which is mainly aimed at A-class
+          (safety-critical) joints and more advanced assembly needs.
+        </p>
+        <p>
+          XB also connects customers into the PF8 ecosystem: result tracking,
+          centralized configuration, and tightening analysis. The tools run on
+          their own platform and can connect wirelessly to Px2.
+        </p>
+        <ul class="list">
+          <li>
+            <strong>XCB</strong> — clutch tool for standard applications.
+          </li>
+          <li>
+            <strong>XTB</strong> — transducerized tool for standard and
+            quality-critical applications, with torque and angle control and
+            multiple programs.
+          </li>
+        </ul>
+
+        <img
+          class="r"
+          src="projects/atlascopco/img/xb-family.jpg"
+          alt="Atlas Copco XB tool family"
+        />
+
+        <div class="two-cols-50-50">
+          <div>
+            <img
+              class="r"
+              src="projects/atlascopco/img/XTB.png"
+              alt="Atlas Copco XTB transducerized cordless tool"
+            />
+            <p><strong>XTB</strong> — transducerized, quality-critical capable.</p>
+          </div>
+          <div>
+            <img
+              class="r"
+              src="projects/atlascopco/img/XCB.png"
+              alt="Atlas Copco XCB clutch cordless tool"
+            />
+            <p><strong>XCB</strong> — clutch tool for standard applications.</p>
+          </div>
+        </div>
+
+        <img
+          class="r"
+          src="projects/atlascopco/img/xtb-perspective.jpg"
+          alt="XTB tool in perspective"
+        />
+
+        <h5>Role &amp; surfaces</h5>
+        <p>
+          I was the sole UX designer for both the configuration UI and the tool
+          UI.
+        </p>
+        <p>
+          The tool display is a small 128×128 px OLED — black or white only, no
+          greyscale — with three tactile buttons for navigation. The
+          configuration UI is web-based: technicians set preferences and
+          programs, and can view tool information and events.
+        </p>
+
+        <h5>Challenges</h5>
+        <p>
+          XB sits on a separate platform from PF8/IxB, with its own constraints
+          and less compute power. I had to balance what the product needed on its
+          own against staying coherent with the wider ecosystem. Ease of use
+          mattered a lot too — unlike the more advanced Px2, XB should feel ready
+          out of the box, without deep prior knowledge of tightening technique.
+        </p>
+        <p>
+          And then there’s the display itself: 128×128 pixels on a tiny
+          monochrome screen.
+        </p>
+        <p>
+          I worked closely with the Px2 design team, and proactively with the XB
+          product owner, product manager, and developers, to adapt parts of Px2
+          functionality onto this more concentrated platform.
+        </p>
+
+        <figure class="img-placeholder">
+          <div class="img-placeholder-inner">
+            <p class="img-placeholder-label">Placeholder</p>
+            <p>
+              Constraint diagram: 128×128 OLED + three-button navigation model
+              (black/white only).
+            </p>
+          </div>
+          <figcaption>
+            Suggested: annotated hardware sketch of display and button layout.
+          </figcaption>
+        </figure>
+
+        <figure class="img-placeholder">
+          <div class="img-placeholder-inner">
+            <p class="img-placeholder-label">Placeholder</p>
+            <p>
+              Tool UI grid — 128×128 screens (OK/NOK feedback, menu, program
+              select). Critical portfolio visual.
+            </p>
+          </div>
+          <figcaption>
+            Suggested: 4–6 screen states as a monochrome grid.
+          </figcaption>
+        </figure>
+
+        <figure class="img-placeholder">
+          <div class="img-placeholder-inner">
+            <p class="img-placeholder-label">Placeholder</p>
+            <p>
+              Web configuration UI — programs, preferences, tool info and
+              events.
+            </p>
+          </div>
+          <figcaption>
+            Suggested: 2–3 key config screens showing setup simplicity vs Px2
+            depth.
+          </figcaption>
+        </figure>
+
+        <h5>Outcome</h5>
+        <p>
+          The complete XB tool family was released on 26 March 2026. Early
+          customer and industry feedback has focused on out-of-the-box ease of
+          use, operator comfort, and line efficiency. From a design standpoint
+          the reception has been highly favorable — notably earning the
+          <strong>2026 Red Dot Design Award</strong> for its focus on modern
+          manufacturing ergonomics.
+        </p>
+
+        <figure class="img-placeholder">
+          <div class="img-placeholder-inner">
+            <p class="img-placeholder-label">Placeholder</p>
+            <p>Red Dot Design Award 2026 mark or public press still.</p>
+          </div>
+          <figcaption>
+            Suggested: official Red Dot asset or Atlas Copco press imagery
+            (public).
+          </figcaption>
+        </figure>
+      </div>
+
+      <!-- ========== DESIGN SYSTEM ========== -->
+      <span class="divider"></span>
+      <h4>Design system — Coherence across ITBA</h4>
+      <div class="g">
+        <h5>Background</h5>
+        <p>
+          Alongside product work, I also spent part of my time on a grassroots
+          design system effort — without a dedicated team at the start. The goal
+          was a more systematic way of designing across ITBA: reusable,
+          scalable, and coherent.
+        </p>
+        <p>
+          It grew into a collaboration across roughly 15 UX designers, with
+          different people owning north star, style, tokens, components,
+          patterns, and information architecture. I was involved in several of
+          those areas, but mainly responsible for token architecture and
+          component design plus documentation.
+        </p>
+        <p>
+          The scope covers all ITBA products — about a dozen web and mobile
+          apps, and four tool applications.
+        </p>
+
+        <h5>Process</h5>
+        <p>For each component, the loop looked like this:</p>
+        <ul class="list">
+          <li>Audit how the component showed up across products</li>
+          <li>Look at best practices in established design systems</li>
+          <li>Assemble requirements</li>
+          <li>Design the component and document usage guidelines</li>
+          <li>
+            Review and implement with two development teams using React, Radix,
+            and Tailwind
+          </li>
+        </ul>
+
+        <h5>Outcome</h5>
+        <p>
+          The result is a library of <strong>40+ base components</strong>
+          (buttons, inputs, tables, lists, checkboxes, and so on) built on
+          tokens, documented in Figma, and implemented in code. We’re still
+          rolling them into products — they aren’t used in shipping UIs yet,
+          but that’s coming soon.
+        </p>
+
+        <div class="two-cols-50-50">
+          <figure class="img-placeholder">
+            <div class="img-placeholder-inner">
+              <p class="img-placeholder-label">Placeholder</p>
+              <p>System overview or north star one-pager.</p>
+            </div>
+            <figcaption>Suggested: high-level system map.</figcaption>
+          </figure>
+          <figure class="img-placeholder">
+            <div class="img-placeholder-inner">
+              <p class="img-placeholder-label">Placeholder</p>
+              <p>Token architecture diagram.</p>
+            </div>
+            <figcaption>
+              Suggested: foundation → semantic → component tokens.
+            </figcaption>
+          </figure>
+        </div>
+
+        <figure class="img-placeholder">
+          <div class="img-placeholder-inner">
+            <p class="img-placeholder-label">Placeholder</p>
+            <p>Component gallery from Figma — sample of the 40+ base set.</p>
+          </div>
+          <figcaption>Suggested: buttons, inputs, tables, lists grid.</figcaption>
+        </figure>
+
+        <figure class="img-placeholder">
+          <div class="img-placeholder-inner">
+            <p class="img-placeholder-label">Placeholder</p>
+            <p>
+              Example component documentation page — anatomy and usage
+              guidelines.
+            </p>
+          </div>
+          <figcaption>
+            Suggested: one deep-dive component doc (do/don’t if available).
+          </figcaption>
+        </figure>
+      </div>
+
+      <!-- ========== CLOSING ========== -->
+      <span class="divider"></span>
+      <h4>Working across the ecosystem</h4>
+      <div class="g">
+        <p>
+          What made this role different from a single product case was working
+          on all three at once — switching between controller software, a
+          constrained tool platform, and shared design foundations.
+        </p>
+        <p>
+          Collaborating with the Px2 design team helped XB stay coherent with
+          the ecosystem without copying PF8 wholesale. We adapted concepts to a
+          simpler platform and a more approachable mental model.
+        </p>
+        <p>
+          The product work also fed the design system. Auditing real apps shaped
+          tokens and components — and as the library lands in products, that
+          shared baseline goes back into the next features.
+        </p>
+      </div>
+
+      <!--
+        ========================================================================
+        MANAGER / LEGAL CHECKLIST — clear before publishing publicly
+        ========================================================================
+        Claims & narrative
+        [ ] Stating €1B+ frame-agreement value and linking it to the feature /
+            research initiative
+        [ ] Describing the customer factory visit, line walk, and co-design
+            workshop in a public portfolio
+        [ ] Calling yourself sole UX designer on XB (config + tool UI)
+        [ ] Crediting Red Dot 2026 in first person vs company award language
+        [ ] Design system status (“not in products yet”) — confirm tone with
+            DS leads
+
+        Visuals & IP
+        [ ] Screenshots of customer-specific controller/tool result views
+            (even anonymized)
+        [ ] Any photos from the customer site (faces, badges, line layout)
+        [ ] SyncMode UI (legacy ToolsTalk and/or PF8)
+        [ ] XB configuration UI and full tool display flows (if not already in
+            public marketing)
+        [ ] Design system Figma files, token sheets, internal north-star docs,
+            unpublished component names
+        [ ] Naming the OEM (recommend: never; keep “international automotive
+            manufacturer”)
+        [ ] Internal code names if any differ from public Px2 / PF8 / XB /
+            XTB / XCB / ToolsTalk
+
+        Safe defaults if blocked
+        - Customer feature: process story + anonymized wireflows; no production UI
+        - SyncMode: schematic node diagram you redraw, not product chrome
+        - XB: public marketing photos + redrawn 128×128 mock frames
+        - Design system: public-safe component samples or abstract token diagrams
+        ========================================================================
+      -->
+    </main>
+  </body>
+</html>

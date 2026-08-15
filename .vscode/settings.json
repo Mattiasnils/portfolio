@@ -7,5 +7,5 @@
   "files.autoSave": "onFocusChange", // optional but recommended
   "vs-code-prettier-eslint.prettierLast": "false",
   "editor.inlineSuggest.showToolbar": "onHover",
-  "liveServer.settings.port": 5501 // set as "true" to run 'prettier' last not first
+  "liveServer.settings.port": 5502 // set as "true" to run 'prettier' last not first
 }

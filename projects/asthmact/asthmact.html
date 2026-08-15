@@ -2,19 +2,40 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta
       property="og:image"
       content="https://mattiasnils.github.io/portfolio/public/img/asthmact-thumbnail.png"
     />
     <title>Mattias Nilsson > Asthmact</title>
-    <base href="https://mattiasnils.github.io/portfolio/">
+    <script>
+      (function () {
+        var path = location.pathname;
+        var marker = "/portfolio/";
+        var portfolioRoot;
+
+        if (path.indexOf(marker) !== -1) {
+          portfolioRoot = path.slice(0, path.indexOf(marker) + marker.length);
+        } else {
+          var nestedMatch = path.match(/^(.*)\/(projects|blog)\//);
+          portfolioRoot = nestedMatch ? nestedMatch[1] + "/" : "/";
+        }
+
+        if (portfolioRoot.charAt(0) !== "/") {
+          portfolioRoot = "/" + portfolioRoot;
+        }
+
+        var base = document.createElement("base");
+        base.href = location.origin + portfolioRoot;
+        document.head.appendChild(base);
+      })();
+    </script>
     <link rel="stylesheet" href="resetStyles.css" />
     <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="projects/asthmact/asthmact.css" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <script defer src="nav.js"></script>
+    <script src="nav-boot.js"></script>
     <script>
       (function (h, o, t, j, a, r) {
         h.hj =
@@ -32,30 +53,7 @@
     </script>
   </head>
   <body>
-    <header>
-      <nav>
-        <div class="menu-icon">
-          <input class="menu-icon__cheeckbox" type="checkbox" />
-          <div>
-            <span></span>
-            <span></span>
-          </div>
-        </div>
-        <ul>
-          <li><a href="index.html#work">Home</a></li>
-          <li><a href="projects/spotlight/spotlight.html"><svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.7941 11.9999L-4.57764e-05 5.99994L7.7941 0V3.40186H17.0316V8.59796H7.7941V11.9999Z" fill="currentColor"/>
-            </svg></a></a></li>
-          <li>
-            <a href="projects/spatio-temporal-chat/spatio-temporal-chat.html"
-              ><svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.23751 11.9999L17.0317 5.99994L9.23751 0V3.40186H0V8.59796H9.23751V11.9999Z" fill="currentColor"/>
-                </svg></a
-            >
-          </li>
-        </ul>
-      </nav>
-    </header>
+    <header data-nav-mount data-mega-nav></header>
     <main>
       <div class="project-intro">
         <div class="headline animate-pop-up">
@@ -97,12 +95,12 @@
           </p>
           <h3>Tools</h3>
           <div class="tools-row">
-            <div class="tool-icon">
-              <img src="public/icons/affinity-designer-icon.svg" alt="" />
+            <div class="tool-badge">
+              <img src="public/icons/affinity-designer-icon.svg" alt="Affinity Designer" />
               <p>Affinity Designer</p>
             </div>
-            <div class="tool-icon">
-              <img src="public/icons/sketchbook-icon.svg" alt="" />
+            <div class="tool-badge">
+              <img src="public/icons/sketchbook-icon.svg" alt="SketchBook" />
               <p>SketchBook</p>
             </div>
           </div>

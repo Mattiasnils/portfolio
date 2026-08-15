@@ -2,10 +2,6 @@
   --blue: rgb(78, 158, 255);
 }
 
-.menu-icon span {
-  background-color: black;
-}
-
 body {
   background: black;
 }
@@ -26,7 +22,7 @@ body {
 }
 
 .project-summary {
-  align-items: top;
+  align-items: baseline;
   display: block;
   margin: 0 auto;
   padding: 0 10%;
@@ -74,18 +70,7 @@ strong {
   gap: 0.5rem;
 }
 
-.tool-icon {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  flex-direction: row;
-  gap: 0.5rem;
-  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-  background-color: rgb(100, 100, 100, 0.5);
-  border-radius: 0.5rem;
-}
-
-span {
+.headline span {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
@@ -121,7 +106,7 @@ span {
   }
 
   .project-summary {
-    align-items: top;
+    align-items: baseline;
     display: grid;
     grid-template-columns: max-content 1fr;
     row-gap: 1rem;

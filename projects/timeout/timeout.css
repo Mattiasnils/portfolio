@@ -1,15 +1,9 @@
 :root {
-  --purple: rgb(76, 97, 222);
-  --grey-text: rgb(130, 130, 130);
   --grey-bg: rgb(36, 36, 35);
 }
 
-.menu-icon span {
-  background-color: black;
-}
-
 body {
-  background: white;
+  background: var(--page-bg);
 }
 
 .g {
@@ -45,7 +39,7 @@ body {
 }
 
 .project-summary {
-  align-items: top;
+  align-items: baseline;
   display: block;
   margin: 2rem auto 0 auto;
   padding: 0 10%;
@@ -57,7 +51,7 @@ body {
 }
 
 .project-summary a {
-  color: black;
+  color: var(--text);
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
@@ -71,17 +65,17 @@ h1 {
 
 h2 {
   padding: unset;
-  color: black;
+  color: var(--text);
 }
 
 h3 {
-  color: black;
+  color: var(--text);
   font-size: 1.2rem;
   padding-bottom: 0.5rem;
 }
 
 h4 {
-  color: black;
+  color: var(--text);
   text-align: center;
   padding: 4rem 2rem 2rem 2rem;
   font-size: 2.5rem;
@@ -97,7 +91,7 @@ h5 {
 }
 
 h6 {
-  color: rgb(174, 174, 174);
+  color: var(--subheader);
   font-weight: bold;
   text-align: left;
   font-size: 1.25rem;
@@ -105,8 +99,17 @@ h6 {
 }
 
 p {
-  color: black;
+  color: var(--text);
   line-height: 1.5rem;
+}
+
+b {
+  font-weight: bold;
+}
+
+strong {
+  font-weight: bold;
+  color: var(--purple);
 }
 
 .tools-row {
@@ -114,17 +117,6 @@ p {
   flex-direction: row;
   flex-wrap: wrap;
   gap: 0.5rem;
-}
-
-.tool-icon {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  flex-direction: row;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  background-color: rgb(100, 100, 100, 0.5);
-  border-radius: 0.5rem;
 }
 
 b {
@@ -143,12 +135,12 @@ blockquote {
   line-height: normal;
   letter-spacing: 0.03rem;
   text-align: center;
-  color: var(--grey-text);
+  color: var(--date);
   padding: 2rem 2rem;
 }
 
 cite {
-  color: white;
+  color: var(--text);
 }
 
 .center-text {
@@ -158,8 +150,7 @@ cite {
 }
 
 .list {
-  list-style: circle;
-  line-height: 1.25rem;
+  list-style: disc;
   margin-left: 1rem;
   padding: 2rem 0rem 0.5rem 0;
 }
@@ -169,7 +160,7 @@ cite {
   padding: 2rem 1rem 0 2rem;
   margin: 2rem 0;
   border-radius: 1rem;
-  height: 80%;
+  height: 70%;
   padding-bottom: 2rem;
 }
 
@@ -186,10 +177,6 @@ cite {
   border-radius: 1rem;
 }
 
-main ul li {
-  padding-bottom: 1.5rem;
-}
-
 .white-background {
   background-color: white;
   padding: 1% 0;
@@ -203,7 +190,7 @@ main ul li {
 .white-background h6,
 .white-background p,
 .white-background li {
-  color: black;
+  color: var(--button-text);
 }
 
 .gallery {
@@ -256,7 +243,7 @@ main ul li {
   }
 
   .project-summary {
-    align-items: top;
+    align-items: baseline;
     display: grid;
     grid-template-columns: max-content 1fr;
     row-gap: 1rem;

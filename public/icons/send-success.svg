@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-hidden="true">
+  <style>
+    .send-success-plane {
+      transform-origin: 24px 24px;
+      animation: send-success-plane 3.2s ease-in-out forwards;
+    }
+
+    .send-success-check-group {
+      transform-origin: 24px 24px;
+      animation: send-success-check 3.2s ease-in-out forwards;
+    }
+
+    .send-success-check-green {
+      animation: send-success-green-fade 3.2s ease-in-out forwards;
+    }
+
+    .send-success-check-blue {
+      opacity: 0;
+      animation: send-success-blue-fade 3.2s ease-in-out forwards;
+    }
+
+    .send-success-circle {
+      fill: none;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-dasharray: 126;
+      stroke-dashoffset: 126;
+      animation: send-success-circle-draw 3.2s ease-in-out forwards;
+    }
+
+    .send-success-check-path {
+      fill: none;
+      stroke-width: 3.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 30;
+      stroke-dashoffset: 30;
+      animation: send-success-check-draw 3.2s ease-in-out forwards;
+    }
+
+    .send-success-circle-green,
+    .send-success-check-path-green {
+      stroke: #22c55e;
+    }
+
+    .send-success-circle-blue,
+    .send-success-check-path-blue {
+      stroke: #287abd;
+      stroke-dashoffset: 0;
+    }
+
+    @keyframes send-success-plane {
+      0%,
+      18% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+
+      32%,
+      100% {
+        opacity: 0;
+        transform: translate(6px, -2px) scale(0.82);
+      }
+    }
+
+    @keyframes send-success-check {
+      0%,
+      28% {
+        opacity: 0;
+        transform: scale(0.72);
+      }
+
+      42%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes send-success-circle-draw {
+      0%,
+      34% {
+        stroke-dashoffset: 126;
+      }
+
+      52%,
+      100% {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    @keyframes send-success-check-draw {
+      0%,
+      40% {
+        stroke-dashoffset: 30;
+      }
+
+      56%,
+      100% {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    @keyframes send-success-green-fade {
+      0%,
+      78% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes send-success-blue-fade {
+      0%,
+      78% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+  </style>
+  <g class="send-success-plane">
+    <g fill="none" stroke="#287abd" stroke-linejoin="round" stroke-width="4">
+      <path d="M43 5L29.7 43L22.1 25.9L5 18.3L43 5Z" />
+      <path stroke-linecap="round" d="M43.0001 5L22.1001 25.9" />
+    </g>
+  </g>
+  <g class="send-success-check-group">
+    <g class="send-success-check-green">
+      <circle class="send-success-circle send-success-circle-green" cx="24" cy="24" r="20" />
+      <path
+        class="send-success-check-path send-success-check-path-green"
+        d="M15 24.5L21 30.5L33 18.5"
+      />
+    </g>
+    <g class="send-success-check-blue">
+      <circle class="send-success-circle send-success-circle-blue" cx="24" cy="24" r="20" />
+      <path
+        class="send-success-check-path send-success-check-path-blue"
+        d="M15 24.5L21 30.5L33 18.5"
+      />
+    </g>
+  </g>
+</svg>
