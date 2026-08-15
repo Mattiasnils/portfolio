@@ -89,12 +89,28 @@
     }
 
     function unlockPageScroll() {
+      const scrollX = savedScrollX;
+      const scrollY = savedScrollY;
+
       clearModalViewportStyles();
       document.documentElement.classList.remove("contact-modal-open");
       document.body.classList.remove("contact-modal-open");
       document.body.style.top = "";
       document.body.style.left = "";
-      window.scrollTo(savedScrollX, savedScrollY);
+
+      const root = document.documentElement;
+      const previousScrollBehavior = root.style.scrollBehavior;
+      root.style.scrollBehavior = "auto";
+
+      window.scrollTo(scrollX, scrollY);
+
+      root.style.scrollBehavior = previousScrollBehavior;
+
+      window.requestAnimationFrame(function () {
+        if (typeof parallaxScroll === "function") {
+          parallaxScroll();
+        }
+      });
     }
 
     function getFocusableElements() {
@@ -204,15 +220,19 @@
     }
 
     function closeModal() {
+      const focusTarget = lastFocusedElement;
+
       modal.hidden = true;
       unlockPageScroll();
       showFormView();
       setSending(false);
       setStatus("");
 
-      if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
-        lastFocusedElement.focus({ preventScroll: true });
-      }
+      window.requestAnimationFrame(function () {
+        if (focusTarget && typeof focusTarget.focus === "function") {
+          focusTarget.focus({ preventScroll: true });
+        }
+      });
     }
 
     function handleKeyDown(event) {
