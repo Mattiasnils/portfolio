@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta
       name="description"
-      content="Mattias is a UX Designer & Engineer with a profound passion for creating exceptional user experiences."
+      content="Mattias is a UX Designer & Engineer speciziled in ecosystem experience and design systems."
     />
     <meta
       name="keywords"
-      content="portfolio, ux, ui, hmi, hci, interaction design, product designer, engineer, chalmers, göteborg, gothenburg, stockholm, lund, malmö, köpenhamn"
+      content="portfolio, ux, ui, hmi, hci, interaction design, product designer, engineer, chalmers, stockholm"
     />
     <meta name="author" content="Mattias Nilsson" />
     <script>
@@ -95,6 +95,7 @@
       sizes="48x48"
     />
     <link rel="shortcut icon" href="favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet">
     <meta name="msapplication-TileColor" content="#2f77b2" />
     <meta name="theme-color" content="aliceblue" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#070a0e" media="(prefers-color-scheme: dark)" />
@@ -114,7 +115,7 @@
     <link rel="stylesheet" href="resetStyles.css" />
     <link rel="stylesheet" href="index.css" />
     <script defer src="index.js"></script>
-    <script defer src="animateOnScroll.js"></script>
+    <script defer src="animateOnScroll.js?v=10"></script>
     <script defer src="lightbox.js"></script>
     <script defer src="contact-form.js"></script>
     <script src="nav-boot.js"></script>
@@ -405,14 +406,14 @@
                 </a>
               </div>
               <div id="contact-row">
-                <button
-                  type="button"
+                <a
                   id="contact-email"
                   class="contact-button"
+                  href="contact.html"
                   aria-label="Contact via email"
                 >
                   <img src="public/icons/email-icon.svg" alt="" />Contact
-                </button>
+                </a>
                 <a
                   id="contact-linkedin"
                   class="contact-button"
@@ -759,7 +760,7 @@
             <textarea
               id="contact-message"
               name="message"
-              rows="5"
+              rows="8"
               required
               maxlength="5000"
             ></textarea>

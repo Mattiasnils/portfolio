@@ -19,7 +19,11 @@
         return;
       }
 
-      if (href.indexOf("projects/") !== -1 || href.indexOf("blog/") !== -1) {
+      if (
+        href.indexOf("projects/") !== -1 ||
+        href.indexOf("blog/") !== -1 ||
+        href.indexOf("contact.html") !== -1
+      ) {
         sessionStorage.setItem("skip-home-intro", "1");
       }
     },

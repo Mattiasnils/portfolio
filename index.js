@@ -41,7 +41,76 @@ function hasSeenIntro() {
   return document.documentElement.classList.contains("intro-seen");
 }
 
-const introSequenceStart = performance.now();
+let introSequenceStart = null;
+
+function getIntroElapsedMs() {
+  if (introSequenceStart === null) {
+    return 0;
+  }
+
+  return performance.now() - introSequenceStart;
+}
+
+function markIntroSequenceStart(startTime) {
+  if (introSequenceStart !== null) {
+    return;
+  }
+
+  introSequenceStart = startTime;
+  document.dispatchEvent(new CustomEvent("intro:sequence-start"));
+}
+
+function ensureIntroSequenceStart() {
+  markIntroSequenceStart(performance.now());
+}
+
+// Anchor JS intro timing to the CSS #introduction animation clock.
+(function initIntroSequenceAnchor() {
+  if (!document.body.classList.contains("home") || hasSeenIntro()) {
+    ensureIntroSequenceStart();
+    return;
+  }
+
+  const intro = document.getElementById("introduction");
+  if (!intro) {
+    ensureIntroSequenceStart();
+    return;
+  }
+
+  intro.addEventListener(
+    "animationstart",
+    function (event) {
+      if (event.animationName === "intro-float-up") {
+        markIntroSequenceStart(performance.now());
+      }
+    },
+    { once: true }
+  );
+
+  window.requestAnimationFrame(function () {
+    if (introSequenceStart !== null) {
+      return;
+    }
+
+    const introAnimation = intro
+      .getAnimations()
+      .find(function (animation) {
+        return animation.animationName === "intro-float-up";
+      });
+
+    if (introAnimation) {
+      markIntroSequenceStart(
+        performance.now() - introAnimation.currentTime
+      );
+    }
+  });
+
+  window.setTimeout(function () {
+    if (introSequenceStart === null && !hasSeenIntro()) {
+      ensureIntroSequenceStart();
+    }
+  }, 6000);
+})();
 
 function parseCssTime(value) {
   const trimmed = (value || "").trim();
@@ -139,8 +208,12 @@ function getIntroNavTimings() {
       return;
     }
 
+    if (introSequenceStart === null) {
+      return;
+    }
+
     const timings = getIntroNavTimings();
-    const elapsed = performance.now() - introSequenceStart;
+    const elapsed = getIntroElapsedMs();
     const settleEnd = timings.delay + timings.duration;
     const remaining = timings.delay - elapsed;
 
@@ -176,11 +249,13 @@ function getIntroNavTimings() {
     scheduleNavIntro(navHeader);
   }
 
-  bindNavIntro(document.querySelector("header[data-nav-mount]"));
-
-  document.addEventListener("nav:mounted", function () {
+  function tryBindNavIntro() {
     bindNavIntro(document.querySelector("header[data-nav-mount]"));
-  });
+  }
+
+  document.addEventListener("intro:sequence-start", tryBindNavIntro);
+  document.addEventListener("nav:mounted", tryBindNavIntro);
+  tryBindNavIntro();
 })();
 
 // Animate bubbles — gentle idle float after entrance animation settles
@@ -194,10 +269,10 @@ function getIntroNavTimings() {
     "(prefers-reduced-motion: reduce)"
   ).matches;
   const amplitude = 10;
-  const frequency = 0.05;
+  const floatPeriodMs = 2094;
   const rampDuration = 900;
   let baseTop = parseFloat(getComputedStyle(bubbles).top);
-  let currentTime = 0;
+  let floatStart = 0;
   let rampStart = 0;
   let rafId = 0;
   let floating = false;
@@ -213,27 +288,29 @@ function getIntroNavTimings() {
       return;
     }
 
-    if (!rampStart) {
-      rampStart = timestamp;
+    if (!floatStart) {
+      floatStart = timestamp || performance.now();
+      rampStart = floatStart;
     }
 
+    const elapsed = timestamp - floatStart;
     const rampProgress = Math.min(1, (timestamp - rampStart) / rampDuration);
     const easedRamp =
       rampProgress * rampProgress * (3 - 2 * rampProgress);
     const currentAmplitude = amplitude * easedRamp;
     const displacement =
-      currentAmplitude * Math.sin(frequency * currentTime);
+      currentAmplitude *
+      Math.sin((2 * Math.PI * elapsed) / floatPeriodMs);
 
     bubbles.style.top = `${baseTop + displacement}px`;
-    currentTime += 1;
     rafId = window.requestAnimationFrame(tick);
   }
 
   function startBubbleFloat() {
     settleBubbleState();
     floating = true;
+    floatStart = 0;
     rampStart = 0;
-    currentTime = 0;
     rafId = window.requestAnimationFrame(tick);
   }
 
@@ -317,26 +394,145 @@ workCards.forEach((card) => {
   };
 });
 
-// Handle the "See More"
-document.addEventListener("DOMContentLoaded", function () {
+// Handle the "See More" — gallery height + post zoom-in
+(function initWriteShowMore() {
   const viewMoreBtn = document.getElementById("show-more-button");
-  const hiddenPosts = document.querySelectorAll(".collapsed");
+  const gallery = document.querySelector("#write .blog-gallery");
+  const hiddenPosts = document.querySelectorAll("#write .blog-post.collapsed");
+  const label = viewMoreBtn && viewMoreBtn.querySelector(".show-more-label");
+
+  if (!viewMoreBtn || !gallery || !hiddenPosts.length) {
+    return;
+  }
+
+  const ANIMATION_MS = 600;
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+  let expanded = viewMoreBtn.getAttribute("aria-expanded") === "true";
+  let animating = false;
+
+  function setExpandedState(isExpanded) {
+    expanded = isExpanded;
+    viewMoreBtn.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+    if (label) {
+      label.textContent = isExpanded ? "Show less" : "Show more";
+    }
+  }
+
+  function animateGalleryHeight(fromHeight, toHeight, onDone) {
+    gallery.classList.add("is-animating");
+    gallery.style.height = fromHeight + "px";
+
+    let finished = false;
+
+    function finish() {
+      if (finished) {
+        return;
+      }
+      finished = true;
+      gallery.removeEventListener("transitionend", onTransitionEnd);
+      window.clearTimeout(fallbackTimer);
+      gallery.classList.remove("is-animating");
+      gallery.style.height = "";
+      if (onDone) {
+        onDone();
+      }
+    }
+
+    function onTransitionEnd(event) {
+      if (event.target !== gallery || event.propertyName !== "height") {
+        return;
+      }
+      finish();
+    }
+
+    gallery.addEventListener("transitionend", onTransitionEnd);
+    const fallbackTimer = window.setTimeout(finish, ANIMATION_MS + 80);
+
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(function () {
+        gallery.style.height = toHeight + "px";
+      });
+    });
+  }
+
+  function expand() {
+    setExpandedState(true);
+
+    if (reducedMotion) {
+      hiddenPosts.forEach(function (post) {
+        post.classList.remove("collapsed", "pending-zoom", "zoom-in");
+      });
+      animating = false;
+      return;
+    }
+
+    const startHeight = gallery.offsetHeight;
+
+    hiddenPosts.forEach(function (post) {
+      post.classList.remove("zoom-in");
+      post.classList.add("pending-zoom");
+      post.classList.remove("collapsed");
+    });
+
+    const endHeight = gallery.scrollHeight;
+
+    animateGalleryHeight(startHeight, endHeight, function () {
+      hiddenPosts.forEach(function (post) {
+        post.classList.remove("zoom-in");
+      });
+      animating = false;
+    });
+
+    window.requestAnimationFrame(function () {
+      hiddenPosts.forEach(function (post) {
+        post.classList.remove("pending-zoom");
+        void post.offsetWidth;
+        post.classList.add("zoom-in");
+      });
+    });
+  }
+
+  function collapse() {
+    setExpandedState(false);
+
+    if (reducedMotion) {
+      hiddenPosts.forEach(function (post) {
+        post.classList.add("collapsed");
+        post.classList.remove("pending-zoom", "zoom-in");
+      });
+      animating = false;
+      return;
+    }
+
+    const startHeight = gallery.offsetHeight;
+
+    hiddenPosts.forEach(function (post) {
+      post.classList.remove("zoom-in", "pending-zoom");
+      post.classList.add("collapsed");
+    });
+
+    const endHeight = gallery.scrollHeight;
+
+    animateGalleryHeight(startHeight, endHeight, function () {
+      animating = false;
+    });
+  }
 
   viewMoreBtn.addEventListener("click", function () {
     this.blur();
-    // Change button text based on visibility
-    if (viewMoreBtn.innerText === "Show more") {
-      viewMoreBtn.innerHTML =
-        '<img src="public/icons/chevronUp-icon.svg" alt="" />Show less';
-    } else {
-      viewMoreBtn.innerHTML =
-        '<img src="public/icons/chevronDown-icon.svg" alt="" />Show more';
+    if (animating) {
+      return;
     }
-    hiddenPosts.forEach((post) => {
-      post.classList.toggle("collapsed");
-    });
+    animating = true;
+    if (expanded) {
+      collapse();
+    } else {
+      expand();
+    }
   });
-});
+})();
 
 // Hover over blog-post
 const blogPostLinks = document.querySelectorAll(".blog-post");

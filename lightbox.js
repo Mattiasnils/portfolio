@@ -26,8 +26,20 @@
       };
     });
 
+    const LIGHTBOX_ANIMATION_MS = 420;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
     let currentIndex = 0;
     let lastFocusedElement = null;
+    let closeAnimationTimer = 0;
+
+    function clearCloseAnimationTimer() {
+      if (closeAnimationTimer) {
+        window.clearTimeout(closeAnimationTimer);
+        closeAnimationTimer = 0;
+      }
+    }
 
     function getFocusableElements() {
       return Array.from(
@@ -47,11 +59,44 @@
       imageEl.alt = slide.alt;
     }
 
+    function finishCloseLightbox() {
+      clearCloseAnimationTimer();
+      lightbox.hidden = true;
+      lightbox.classList.remove(
+        "interests-lightbox--visible",
+        "interests-lightbox--closing"
+      );
+      document.body.classList.remove("lightbox-open");
+      imageEl.removeAttribute("src");
+      imageEl.alt = "";
+
+      if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+        lastFocusedElement.focus();
+      }
+    }
+
     function openLightbox(index) {
+      if (
+        !lightbox.hidden &&
+        lightbox.classList.contains("interests-lightbox--visible")
+      ) {
+        showSlide(index);
+        return;
+      }
+
+      clearCloseAnimationTimer();
       lastFocusedElement = document.activeElement;
       showSlide(index);
       lightbox.hidden = false;
+      lightbox.classList.remove("interests-lightbox--closing");
       document.body.classList.add("lightbox-open");
+
+      window.requestAnimationFrame(function () {
+        window.requestAnimationFrame(function () {
+          lightbox.classList.add("interests-lightbox--visible");
+        });
+      });
+
       window.setTimeout(function () {
         const closeButton = lightbox.querySelector(
           "[data-lightbox-close].interests-lightbox-close"
@@ -63,18 +108,26 @@
     }
 
     function closeLightbox() {
-      if (lightbox.hidden) {
+      if (
+        lightbox.hidden ||
+        lightbox.classList.contains("interests-lightbox--closing")
+      ) {
         return;
       }
 
-      lightbox.hidden = true;
-      document.body.classList.remove("lightbox-open");
-      imageEl.removeAttribute("src");
-      imageEl.alt = "";
+      lightbox.classList.remove("interests-lightbox--visible");
+      lightbox.classList.add("interests-lightbox--closing");
 
-      if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
-        lastFocusedElement.focus();
+      if (prefersReducedMotion) {
+        finishCloseLightbox();
+        return;
       }
+
+      clearCloseAnimationTimer();
+      closeAnimationTimer = window.setTimeout(
+        finishCloseLightbox,
+        LIGHTBOX_ANIMATION_MS
+      );
     }
 
     function handleKeyDown(event) {

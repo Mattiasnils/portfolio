@@ -493,9 +493,13 @@ function applyThemeToSvgIcons() {
       return;
     }
 
-    if (iconImage.dataset.themeIconReady === "true" && existingMask) {
+    if (existingMask) {
       syncSvgMaskClasses(iconImage, existingMask);
       syncSvgMaskSize(iconImage, existingMask);
+      iconImage.classList.add("svg-icon-image-fallback");
+      iconImage.setAttribute("aria-hidden", "true");
+      iconImage.style.display = "none";
+      iconImage.dataset.themeIconReady = "true";
       return;
     }
 
