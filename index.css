@@ -1122,6 +1122,15 @@ main ul li {
   animation: none;
 }
 
+.project-summary.body-reveal,
+.project-summary .body-reveal {
+  opacity: 1;
+  filter: none;
+  translate: none;
+  scale: none;
+  animation: none;
+}
+
 .coming-soon {
   margin: 4rem auto 6rem;
   padding: 0 1.5rem;
@@ -3209,6 +3218,11 @@ img[src*="blog-thumbnails/"],
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .coming-soon-ellipsis span {
+    animation: none;
+    opacity: 1;
+  }
+
   .soft-skill:hover::before,
   .soft-skill:focus::before,
   .soft-skill:has(img[src*="-icon"]):hover img,
