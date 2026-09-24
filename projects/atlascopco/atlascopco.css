@@ -205,6 +205,10 @@ cite {
   margin: 2rem auto;
 }
 
+.project-summary .tools-row {
+  margin-bottom: 0;
+}
+
 .coming-soon {
   margin: 4rem auto 6rem;
   padding: 0 1.5rem;
