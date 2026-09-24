@@ -215,16 +215,10 @@ cite {
 .coming-soon-ellipsis {
   display: inline-block;
   overflow: hidden;
-  width: 1.15em;
-  vertical-align: bottom;
-  text-align: left;
-}
-
-.coming-soon-ellipsis::after {
-  content: "...";
-  display: inline-block;
-  overflow: hidden;
   white-space: nowrap;
+  vertical-align: baseline;
+  line-height: 1;
+  width: 0;
   animation: coming-soon-ellipsis 1.4s steps(4, end) infinite;
 }
 
@@ -238,7 +232,7 @@ cite {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .coming-soon-ellipsis::after {
+  .coming-soon-ellipsis {
     animation: none;
     width: 1.15em;
   }
