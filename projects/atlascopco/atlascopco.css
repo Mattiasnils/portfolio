@@ -205,6 +205,50 @@ cite {
   margin: 2rem auto;
 }
 
+.coming-soon {
+  margin: 4rem auto 6rem;
+  padding: 0 1.5rem;
+  text-align: center;
+  color: var(--secondary);
+}
+
+.coming-soon-ellipsis span {
+  animation: coming-soon-dot 1.4s infinite;
+}
+
+.coming-soon-ellipsis span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.coming-soon-ellipsis span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.coming-soon-ellipsis span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes coming-soon-dot {
+  0%,
+  20% {
+    opacity: 0;
+  }
+  40%,
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coming-soon-ellipsis span {
+    animation: none;
+    opacity: 1;
+  }
+}
+
 .r {
   border-radius: 1rem;
 }
