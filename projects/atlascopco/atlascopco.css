@@ -212,29 +212,31 @@ cite {
   color: var(--secondary);
 }
 
-.coming-soon-ellipsis {
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  vertical-align: baseline;
-  line-height: 1;
-  width: 0;
+.coming-soon-ellipsis::after {
+  content: "";
   animation: coming-soon-ellipsis 1.4s steps(4, end) infinite;
 }
 
 @keyframes coming-soon-ellipsis {
   0% {
-    width: 0;
+    content: "";
   }
+  25% {
+    content: ".";
+  }
+  50% {
+    content: "..";
+  }
+  75%,
   100% {
-    width: 1.15em;
+    content: "...";
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .coming-soon-ellipsis {
+  .coming-soon-ellipsis::after {
     animation: none;
-    width: 1.15em;
+    content: "...";
   }
 }
 
