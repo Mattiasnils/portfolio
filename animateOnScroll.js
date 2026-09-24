@@ -14,13 +14,13 @@ hiddentElements.forEach((el) => observer.observe(el));
   ).matches;
 
   const skipClosest =
-    ".tool-badge, .soft-skill, .work-card, .company-card, .blog-post, .headline, #introduction, #parallax-container, #contact-modal, .interests-lightbox, header, nav, footer, .contact-form, .contact-button, .nova-talent-link";
+    ".tool-badge, .soft-skill, .work-card, .company-card, .blog-post, .headline, #introduction, #parallax-container, #contact-modal, .interests-lightbox, header, nav, footer, .contact-form, .contact-button, .nova-talent-link, .coming-soon, .project-summary";
 
   const skipSelf =
-    "h1, h2, #hero-img, #hero-bubbles, .chevron, .show-more-icon";
+    "h1, h2, #hero-img, #hero-bubbles, .chevron, .show-more-icon, .coming-soon";
 
   const layoutShell =
-    "section, main, body, html, .g, .container, .project-intro, .blog-header, .two-cols, .two-cols-50-50, .three-cols, .scope-map, .about-identity, .about-band, .about-skills-stack, .tools-row, .projects, .blog-gallery, .interests-collage, .company-card-grid";
+    "section, main, body, html, .g, .container, .project-intro, .project-summary, .blog-header, .two-cols, .two-cols-50-50, .three-cols, .scope-map, .about-identity, .about-band, .about-skills-stack, .tools-row, .projects, .blog-gallery, .interests-collage, .company-card-grid";
 
   const minChars = 60;
 
