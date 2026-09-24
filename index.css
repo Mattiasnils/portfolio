@@ -161,12 +161,14 @@
   }
 }
 
-/* Nav & tool-badge backdrop themes — content-driven, independent of system pref.
-   Page sections keep --nav-glass-* from :root (system theme above). */
+/* Nav, tool-badge, and work-card-badge backdrop themes — content-driven,
+   independent of system pref. Page sections keep --nav-glass-* from :root. */
 header[data-nav-mount][data-nav-backdrop="light"],
 header[data-nav-mount]:not([data-nav-backdrop]),
 .tool-badge[data-tool-backdrop="light"],
-.tool-badge:not([data-tool-backdrop]) {
+.tool-badge:not([data-tool-backdrop]),
+.work-card-badge[data-tool-backdrop="light"],
+.work-card-badge:not([data-tool-backdrop]) {
   --text: rgb(0, 0, 0);
   --primary: rgb(40, 122, 189);
   --subheader: rgb(53, 53, 53);
@@ -196,7 +198,8 @@ header[data-nav-mount]:not([data-nav-backdrop]),
 }
 
 header[data-nav-mount][data-nav-backdrop="dark"],
-.tool-badge[data-tool-backdrop="dark"] {
+.tool-badge[data-tool-backdrop="dark"],
+.work-card-badge[data-tool-backdrop="dark"] {
   --text: rgb(210, 210, 210);
   --primary: rgb(255, 255, 255);
   --subheader: rgb(213, 213, 213);
