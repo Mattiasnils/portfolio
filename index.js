@@ -394,6 +394,149 @@ workCards.forEach((card) => {
   };
 });
 
+function clampNumber(value, min, max) {
+  return Math.min(max, Math.max(min, value));
+}
+
+function channelToLinear(channel) {
+  const value = channel / 255;
+  return value <= 0.03928 ? value / 12.92 : Math.pow((value + 0.055) / 1.055, 2.4);
+}
+
+function relativeLuminance(r, g, b) {
+  return (
+    0.2126 * channelToLinear(r) +
+    0.7152 * channelToLinear(g) +
+    0.0722 * channelToLinear(b)
+  );
+}
+
+function mapCoverClientRectToImagePixels(img, clientRect) {
+  const naturalWidth = img.naturalWidth;
+  const naturalHeight = img.naturalHeight;
+  const displayRect = img.getBoundingClientRect();
+
+  if (!naturalWidth || !naturalHeight || !displayRect.width || !displayRect.height) {
+    return null;
+  }
+
+  const scale = Math.max(
+    displayRect.width / naturalWidth,
+    displayRect.height / naturalHeight
+  );
+  const displayedWidth = naturalWidth * scale;
+  const displayedHeight = naturalHeight * scale;
+  const originX = displayRect.left + (displayRect.width - displayedWidth) / 2;
+  const originY = displayRect.top + (displayRect.height - displayedHeight) / 2;
+  const left = clampNumber((clientRect.left - originX) / scale, 0, naturalWidth);
+  const top = clampNumber((clientRect.top - originY) / scale, 0, naturalHeight);
+  const right = clampNumber((clientRect.right - originX) / scale, 0, naturalWidth);
+  const bottom = clampNumber((clientRect.bottom - originY) / scale, 0, naturalHeight);
+  const width = right - left;
+  const height = bottom - top;
+
+  if (width < 1 || height < 1) {
+    return null;
+  }
+
+  return { x: left, y: top, width: width, height: height };
+}
+
+function sampleImageRegionLuminance(img, clientRect) {
+  const region = mapCoverClientRectToImagePixels(img, clientRect);
+  if (!region) {
+    return null;
+  }
+
+  const canvas = document.createElement("canvas");
+  const width = Math.max(1, Math.round(region.width));
+  const height = Math.max(1, Math.round(region.height));
+  canvas.width = width;
+  canvas.height = height;
+
+  const context = canvas.getContext("2d", { willReadFrequently: true });
+  if (!context) {
+    return null;
+  }
+
+  try {
+    context.drawImage(
+      img,
+      region.x,
+      region.y,
+      region.width,
+      region.height,
+      0,
+      0,
+      width,
+      height
+    );
+    const pixels = context.getImageData(0, 0, width, height).data;
+    let total = 0;
+    let count = 0;
+
+    for (let i = 0; i < pixels.length; i += 4) {
+      if (pixels[i + 3] < 16) {
+        continue;
+      }
+
+      total += relativeLuminance(pixels[i], pixels[i + 1], pixels[i + 2]);
+      count += 1;
+    }
+
+    return count ? total / count : null;
+  } catch (error) {
+    return null;
+  }
+}
+
+function workCardBadgeSampleRect(card, badge) {
+  const badgeRect = badge.getBoundingClientRect();
+  if (badgeRect.width && badgeRect.height) {
+    return badgeRect;
+  }
+
+  const media = card.querySelector(".work-card-media") || card;
+  const mediaRect = media.getBoundingClientRect();
+  return {
+    left: mediaRect.right - Math.min(140, mediaRect.width * 0.4),
+    top: mediaRect.top + 10,
+    right: mediaRect.right - 10,
+    bottom: mediaRect.top + 42,
+  };
+}
+
+function applyWorkCardBadgeBackdrop(card) {
+  const badge = card.querySelector(".work-card-badge");
+  const image = card.querySelector(".work-card-media img") || card.querySelector("img");
+
+  if (!badge || !image) {
+    return;
+  }
+
+  function apply() {
+    const luminance = sampleImageRegionLuminance(
+      image,
+      workCardBadgeSampleRect(card, badge)
+    );
+
+    if (luminance == null) {
+      return;
+    }
+
+    badge.setAttribute("data-tool-backdrop", luminance >= 0.45 ? "light" : "dark");
+  }
+
+  if (image.complete && image.naturalWidth) {
+    apply();
+    return;
+  }
+
+  image.addEventListener("load", apply, { once: true });
+}
+
+workCards.forEach(applyWorkCardBadgeBackdrop);
+
 // Handle the "See More" — gallery height + post zoom-in
 (function initWriteShowMore() {
   const viewMoreBtn = document.getElementById("show-more-button");
