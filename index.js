@@ -411,6 +411,74 @@ function relativeLuminance(r, g, b) {
   );
 }
 
+function parseCssColor(colorStr) {
+  if (!colorStr || colorStr === "transparent") {
+    return null;
+  }
+
+  const rgbaMatch = colorStr.match(
+    /rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)(?:[,\s/]+([\d.]+%?))?\s*\)/
+  );
+
+  if (!rgbaMatch) {
+    return null;
+  }
+
+  const alphaToken = rgbaMatch[4];
+  const alpha =
+    alphaToken === undefined
+      ? 1
+      : alphaToken.includes("%")
+        ? parseFloat(alphaToken) / 100
+        : parseFloat(alphaToken);
+
+  if (alpha <= 0) {
+    return null;
+  }
+
+  return {
+    r: parseFloat(rgbaMatch[1]),
+    g: parseFloat(rgbaMatch[2]),
+    b: parseFloat(rgbaMatch[3]),
+    a: alpha,
+  };
+}
+
+function compositeColors(source, destination) {
+  if (!source) {
+    return destination;
+  }
+
+  if (!destination || source.a >= 0.999) {
+    return source;
+  }
+
+  const outAlpha = source.a + destination.a * (1 - source.a);
+  if (outAlpha <= 0) {
+    return null;
+  }
+
+  const destWeight = destination.a * (1 - source.a);
+  return {
+    r: (source.r * source.a + destination.r * destWeight) / outAlpha,
+    g: (source.g * source.a + destination.g * destWeight) / outAlpha,
+    b: (source.b * source.a + destination.b * destWeight) / outAlpha,
+    a: outAlpha,
+  };
+}
+
+function workCardBackdropColor(card) {
+  const pageColor =
+    parseCssColor(
+      getComputedStyle(document.documentElement).backgroundColor
+    ) ||
+    parseCssColor(getComputedStyle(document.body).backgroundColor) ||
+    { r: 240, g: 248, b: 255, a: 1 };
+  const cardColor = parseCssColor(getComputedStyle(card).backgroundColor);
+
+  return compositeColors(cardColor, pageColor) || pageColor;
+}
+
 function mapCoverClientRectToImagePixels(img, clientRect) {
   const naturalWidth = img.naturalWidth;
   const naturalHeight = img.naturalHeight;
@@ -442,10 +510,12 @@ function mapCoverClientRectToImagePixels(img, clientRect) {
   return { x: left, y: top, width: width, height: height };
 }
 
-function sampleImageRegionLuminance(img, clientRect) {
+function sampleImageRegionLuminance(img, clientRect, fallbackColor) {
   const region = mapCoverClientRectToImagePixels(img, clientRect);
   if (!region) {
-    return null;
+    return fallbackColor
+      ? relativeLuminance(fallbackColor.r, fallbackColor.g, fallbackColor.b)
+      : null;
   }
 
   const canvas = document.createElement("canvas");
@@ -456,7 +526,9 @@ function sampleImageRegionLuminance(img, clientRect) {
 
   const context = canvas.getContext("2d", { willReadFrequently: true });
   if (!context) {
-    return null;
+    return fallbackColor
+      ? relativeLuminance(fallbackColor.r, fallbackColor.g, fallbackColor.b)
+      : null;
   }
 
   try {
@@ -476,17 +548,33 @@ function sampleImageRegionLuminance(img, clientRect) {
     let count = 0;
 
     for (let i = 0; i < pixels.length; i += 4) {
-      if (pixels[i + 3] < 16) {
+      const pixelColor = {
+        r: pixels[i],
+        g: pixels[i + 1],
+        b: pixels[i + 2],
+        a: pixels[i + 3] / 255,
+      };
+      const visibleColor = compositeColors(pixelColor, fallbackColor);
+
+      if (!visibleColor || visibleColor.a < 0.06) {
         continue;
       }
 
-      total += relativeLuminance(pixels[i], pixels[i + 1], pixels[i + 2]);
+      total += relativeLuminance(visibleColor.r, visibleColor.g, visibleColor.b);
       count += 1;
     }
 
-    return count ? total / count : null;
+    if (count) {
+      return total / count;
+    }
+
+    return fallbackColor
+      ? relativeLuminance(fallbackColor.r, fallbackColor.g, fallbackColor.b)
+      : null;
   } catch (error) {
-    return null;
+    return fallbackColor
+      ? relativeLuminance(fallbackColor.r, fallbackColor.g, fallbackColor.b)
+      : null;
   }
 }
 
@@ -515,9 +603,11 @@ function applyWorkCardBadgeBackdrop(card) {
   }
 
   function apply() {
+    const fallbackColor = workCardBackdropColor(card);
     const luminance = sampleImageRegionLuminance(
       image,
-      workCardBadgeSampleRect(card, badge)
+      workCardBadgeSampleRect(card, badge),
+      fallbackColor
     );
 
     if (luminance == null) {
@@ -532,10 +622,36 @@ function applyWorkCardBadgeBackdrop(card) {
     return;
   }
 
+  apply();
   image.addEventListener("load", apply, { once: true });
 }
 
-workCards.forEach(applyWorkCardBadgeBackdrop);
+function refreshWorkCardBadgeBackdrops() {
+  workCards.forEach(applyWorkCardBadgeBackdrop);
+}
+
+function bindWorkCardBadgeThemeSync() {
+  if (!window.matchMedia) {
+    return;
+  }
+
+  const colorSchemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+  function onColorSchemeChange() {
+    requestAnimationFrame(function () {
+      requestAnimationFrame(refreshWorkCardBadgeBackdrops);
+    });
+  }
+
+  if (typeof colorSchemeQuery.addEventListener === "function") {
+    colorSchemeQuery.addEventListener("change", onColorSchemeChange);
+  } else if (typeof colorSchemeQuery.addListener === "function") {
+    colorSchemeQuery.addListener(onColorSchemeChange);
+  }
+}
+
+refreshWorkCardBadgeBackdrops();
+bindWorkCardBadgeThemeSync();
 
 // Handle the "See More" — gallery height + post zoom-in
 (function initWriteShowMore() {
