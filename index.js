@@ -411,74 +411,6 @@ function relativeLuminance(r, g, b) {
   );
 }
 
-function parseCssColor(colorStr) {
-  if (!colorStr || colorStr === "transparent") {
-    return null;
-  }
-
-  const rgbaMatch = colorStr.match(
-    /rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)(?:[,\s/]+([\d.]+%?))?\s*\)/
-  );
-
-  if (!rgbaMatch) {
-    return null;
-  }
-
-  const alphaToken = rgbaMatch[4];
-  const alpha =
-    alphaToken === undefined
-      ? 1
-      : alphaToken.includes("%")
-        ? parseFloat(alphaToken) / 100
-        : parseFloat(alphaToken);
-
-  if (alpha <= 0) {
-    return null;
-  }
-
-  return {
-    r: parseFloat(rgbaMatch[1]),
-    g: parseFloat(rgbaMatch[2]),
-    b: parseFloat(rgbaMatch[3]),
-    a: alpha,
-  };
-}
-
-function compositeColors(source, destination) {
-  if (!source) {
-    return destination;
-  }
-
-  if (!destination || source.a >= 0.999) {
-    return source;
-  }
-
-  const outAlpha = source.a + destination.a * (1 - source.a);
-  if (outAlpha <= 0) {
-    return null;
-  }
-
-  const destWeight = destination.a * (1 - source.a);
-  return {
-    r: (source.r * source.a + destination.r * destWeight) / outAlpha,
-    g: (source.g * source.a + destination.g * destWeight) / outAlpha,
-    b: (source.b * source.a + destination.b * destWeight) / outAlpha,
-    a: outAlpha,
-  };
-}
-
-function workCardBackdropColor(card) {
-  const pageColor =
-    parseCssColor(
-      getComputedStyle(document.documentElement).backgroundColor
-    ) ||
-    parseCssColor(getComputedStyle(document.body).backgroundColor) ||
-    { r: 240, g: 248, b: 255, a: 1 };
-  const cardColor = parseCssColor(getComputedStyle(card).backgroundColor);
-
-  return compositeColors(cardColor, pageColor) || pageColor;
-}
-
 function mapCoverClientRectToImagePixels(img, clientRect) {
   const naturalWidth = img.naturalWidth;
   const naturalHeight = img.naturalHeight;
@@ -510,12 +442,10 @@ function mapCoverClientRectToImagePixels(img, clientRect) {
   return { x: left, y: top, width: width, height: height };
 }
 
-function sampleImageRegionLuminance(img, clientRect, fallbackColor) {
+function sampleImageRegion(img, clientRect) {
   const region = mapCoverClientRectToImagePixels(img, clientRect);
   if (!region) {
-    return fallbackColor
-      ? relativeLuminance(fallbackColor.r, fallbackColor.g, fallbackColor.b)
-      : null;
+    return null;
   }
 
   const canvas = document.createElement("canvas");
@@ -526,9 +456,7 @@ function sampleImageRegionLuminance(img, clientRect, fallbackColor) {
 
   const context = canvas.getContext("2d", { willReadFrequently: true });
   if (!context) {
-    return fallbackColor
-      ? relativeLuminance(fallbackColor.r, fallbackColor.g, fallbackColor.b)
-      : null;
+    return null;
   }
 
   try {
@@ -545,36 +473,24 @@ function sampleImageRegionLuminance(img, clientRect, fallbackColor) {
     );
     const pixels = context.getImageData(0, 0, width, height).data;
     let total = 0;
-    let count = 0;
+    let opaqueCount = 0;
+    const pixelCount = pixels.length / 4;
 
     for (let i = 0; i < pixels.length; i += 4) {
-      const pixelColor = {
-        r: pixels[i],
-        g: pixels[i + 1],
-        b: pixels[i + 2],
-        a: pixels[i + 3] / 255,
-      };
-      const visibleColor = compositeColors(pixelColor, fallbackColor);
-
-      if (!visibleColor || visibleColor.a < 0.06) {
+      if (pixels[i + 3] < 16) {
         continue;
       }
 
-      total += relativeLuminance(visibleColor.r, visibleColor.g, visibleColor.b);
-      count += 1;
+      total += relativeLuminance(pixels[i], pixels[i + 1], pixels[i + 2]);
+      opaqueCount += 1;
     }
 
-    if (count) {
-      return total / count;
-    }
-
-    return fallbackColor
-      ? relativeLuminance(fallbackColor.r, fallbackColor.g, fallbackColor.b)
-      : null;
+    return {
+      coverage: pixelCount ? opaqueCount / pixelCount : 0,
+      luminance: opaqueCount ? total / opaqueCount : null,
+    };
   } catch (error) {
-    return fallbackColor
-      ? relativeLuminance(fallbackColor.r, fallbackColor.g, fallbackColor.b)
-      : null;
+    return null;
   }
 }
 
@@ -603,18 +519,17 @@ function applyWorkCardBadgeBackdrop(card) {
   }
 
   function apply() {
-    const fallbackColor = workCardBackdropColor(card);
-    const luminance = sampleImageRegionLuminance(
-      image,
-      workCardBadgeSampleRect(card, badge),
-      fallbackColor
-    );
+    const sample = sampleImageRegion(image, workCardBadgeSampleRect(card, badge));
 
-    if (luminance == null) {
+    if (!sample || sample.coverage < 0.15 || sample.luminance == null) {
+      badge.setAttribute("data-tool-backdrop", "theme");
       return;
     }
 
-    badge.setAttribute("data-tool-backdrop", luminance >= 0.45 ? "light" : "dark");
+    badge.setAttribute(
+      "data-tool-backdrop",
+      sample.luminance >= 0.45 ? "light" : "dark"
+    );
   }
 
   if (image.complete && image.naturalWidth) {
