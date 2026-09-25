@@ -442,7 +442,7 @@ function mapCoverClientRectToImagePixels(img, clientRect) {
   return { x: left, y: top, width: width, height: height };
 }
 
-function sampleImageRegionLuminance(img, clientRect) {
+function sampleImageRegion(img, clientRect) {
   const region = mapCoverClientRectToImagePixels(img, clientRect);
   if (!region) {
     return null;
@@ -473,7 +473,8 @@ function sampleImageRegionLuminance(img, clientRect) {
     );
     const pixels = context.getImageData(0, 0, width, height).data;
     let total = 0;
-    let count = 0;
+    let opaqueCount = 0;
+    const pixelCount = pixels.length / 4;
 
     for (let i = 0; i < pixels.length; i += 4) {
       if (pixels[i + 3] < 16) {
@@ -481,10 +482,13 @@ function sampleImageRegionLuminance(img, clientRect) {
       }
 
       total += relativeLuminance(pixels[i], pixels[i + 1], pixels[i + 2]);
-      count += 1;
+      opaqueCount += 1;
     }
 
-    return count ? total / count : null;
+    return {
+      coverage: pixelCount ? opaqueCount / pixelCount : 0,
+      luminance: opaqueCount ? total / opaqueCount : null,
+    };
   } catch (error) {
     return null;
   }
@@ -515,16 +519,17 @@ function applyWorkCardBadgeBackdrop(card) {
   }
 
   function apply() {
-    const luminance = sampleImageRegionLuminance(
-      image,
-      workCardBadgeSampleRect(card, badge)
-    );
+    const sample = sampleImageRegion(image, workCardBadgeSampleRect(card, badge));
 
-    if (luminance == null) {
+    if (!sample || sample.coverage < 0.15 || sample.luminance == null) {
+      badge.setAttribute("data-tool-backdrop", "theme");
       return;
     }
 
-    badge.setAttribute("data-tool-backdrop", luminance >= 0.45 ? "light" : "dark");
+    badge.setAttribute(
+      "data-tool-backdrop",
+      sample.luminance >= 0.45 ? "light" : "dark"
+    );
   }
 
   if (image.complete && image.naturalWidth) {
@@ -532,10 +537,36 @@ function applyWorkCardBadgeBackdrop(card) {
     return;
   }
 
+  apply();
   image.addEventListener("load", apply, { once: true });
 }
 
-workCards.forEach(applyWorkCardBadgeBackdrop);
+function refreshWorkCardBadgeBackdrops() {
+  workCards.forEach(applyWorkCardBadgeBackdrop);
+}
+
+function bindWorkCardBadgeThemeSync() {
+  if (!window.matchMedia) {
+    return;
+  }
+
+  const colorSchemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+  function onColorSchemeChange() {
+    requestAnimationFrame(function () {
+      requestAnimationFrame(refreshWorkCardBadgeBackdrops);
+    });
+  }
+
+  if (typeof colorSchemeQuery.addEventListener === "function") {
+    colorSchemeQuery.addEventListener("change", onColorSchemeChange);
+  } else if (typeof colorSchemeQuery.addListener === "function") {
+    colorSchemeQuery.addListener(onColorSchemeChange);
+  }
+}
+
+refreshWorkCardBadgeBackdrops();
+bindWorkCardBadgeThemeSync();
 
 // Handle the "See More" — gallery height + post zoom-in
 (function initWriteShowMore() {

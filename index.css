@@ -161,8 +161,10 @@
   }
 }
 
-/* Nav, tool-badge, and work-card-badge backdrop themes — content-driven,
-   independent of system pref. Page sections keep --nav-glass-* from :root. */
+/* Nav, tool-badge, and work-card-badge backdrop themes — content-driven.
+   Work-card badges with data-tool-backdrop="theme" inherit :root tokens
+   so they follow light/dark with the page (transparent thumbnails).
+   Page sections keep --nav-glass-* from :root. */
 header[data-nav-mount][data-nav-backdrop="light"],
 header[data-nav-mount]:not([data-nav-backdrop]),
 .tool-badge[data-tool-backdrop="light"],
